@@ -1,0 +1,16 @@
+{
+  "name": "ElectronVite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/junaidraza12/ElectronVite.git",
+  "author": "Shahab Udin Hamid <59618242+shahabhamid@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sequelize": "^6.37.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
+}

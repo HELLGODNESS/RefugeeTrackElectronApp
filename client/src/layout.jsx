@@ -1,0 +1,20 @@
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import SideDrawer from './components/Navigation/SideDrawer';
+
+
+export default function Layout() {
+  return (
+    <>
+      <main className="flex   bg-zinc-50">
+        <SideDrawer />
+        <section className="w-full ">
+          <Outlet />
+        </section>
+      </main>
+
+
+    </>
+  )
+}
+
