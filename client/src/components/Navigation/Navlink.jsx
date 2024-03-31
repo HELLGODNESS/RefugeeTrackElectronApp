@@ -26,37 +26,37 @@ const NavLinks = (props) => {
       linkTo:"AddUser",
       icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
-    {
-      title: "Guest Dinner/Weave",
-      linkTo:"",
-      icon: <i className="fas fa-smile text-lg"></i>
-    },
+    // {
+    //   title: "Guest Dinner/Weave",
+    //   linkTo:"",
+    //   icon: <i className="fas fa-smile text-lg"></i>
+    // },
     {
       title: "Card Issuance",
       linkTo:"",
       icon: <IdentificationIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
+    // {
+    //   title: "Breakfast",
+    //   linkTo:"",
+    //   icon:<i className="fas fa-bread-slice	text-lg"></i>
+    // },
     {
-      title: "Breakfast",
-      linkTo:"",
-      icon:<i className="fas fa-bread-slice	text-lg"></i>
-    },
-    {
-      title: "Lunch",
+      title: "Services",
       linkTo:"",
       icon:<RocketLaunchIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
-    {
-      title: "Dinner",
-      linkTo:"",
-      icon: <i className="fas fa-pizza-slice text-lg"></i>,
+    // {
+    //   title: "Dinner",
+    //   linkTo:"",
+    //   icon: <i className="fas fa-pizza-slice text-lg"></i>,
 
-    },
-    {
-      title: "Shower",
-      linkTo:"",
-      icon: <i className="fas fa-shower text-lg"></i>,
-    },
+    // },
+    // {
+    //   title: "Shower",
+    //   linkTo:"",
+    //   icon: <i className="fas fa-shower text-lg"></i>,
+    // },
     {
       title: "Report",
       linkTo:"",
