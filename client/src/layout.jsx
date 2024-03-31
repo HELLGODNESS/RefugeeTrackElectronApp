@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideDrawer from './components/Navigation/SideDrawer';
+import SideDrawer from './components/SideDrawer';
 
 
 export default function Layout() {

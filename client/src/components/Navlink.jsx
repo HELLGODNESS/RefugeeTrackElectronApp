@@ -22,8 +22,8 @@ const NavLinks = (props) => {
     },
 
     {
-      title: "Add User",
-      linkTo:"AddUser",
+      title: "People",
+      linkTo: "people",
       icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     // {
@@ -61,6 +61,11 @@ const NavLinks = (props) => {
       title: "Report",
       linkTo:"",
       icon: <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+    },
+    {
+      title: "User Management",
+      linkTo: "users",
+      icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     // {
     //   title: "View all Properties",
