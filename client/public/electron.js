@@ -8,8 +8,8 @@ require('@electron/remote/main').initialize()
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 900,
+    height: 670,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
@@ -21,6 +21,7 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`
   )
+  win.webContents.openDevTools();
 }
 
 app.on('ready', createWindow)

@@ -32,28 +32,28 @@ const NavLinks = (props) => {
       icon: <i className="fas fa-smile text-lg"></i>
     },
     {
-      title: "Card Issuance",
+      title: "Emissione Tessera",
       linkTo:"",
       icon: <IdentificationIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     {
-      title: "Breakfast",
+      title: "Colazione",
       linkTo:"",
       icon:<i className="fas fa-bread-slice	text-lg"></i>
     },
     {
-      title: "Lunch",
+      title: "Pranzo",
       linkTo:"",
       icon:<RocketLaunchIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     {
-      title: "Dinner",
+      title: "Cena",
       linkTo:"",
       icon: <i className="fas fa-pizza-slice text-lg"></i>,
 
     },
     {
-      title: "Shower",
+      title: "Docce",
       linkTo:"",
       icon: <i className="fas fa-shower text-lg"></i>,
     },
