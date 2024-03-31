@@ -43,7 +43,7 @@ const NavLinks = (props) => {
     // },
     {
       title: "Services",
-      linkTo:"",
+      linkTo:"services",
       icon:<RocketLaunchIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     // {

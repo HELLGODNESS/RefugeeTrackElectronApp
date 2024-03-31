@@ -14,7 +14,7 @@
 */
 
 import React, { useState } from 'react';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { PhotoIcon, } from '@heroicons/react/24/solid';
 
 export default function AddUser() {
   const [formData, setFormData] = useState({
@@ -83,15 +83,16 @@ export default function AddUser() {
   return (
     <section className=" bg-white -mt-6 overflow-scroll h-screen w-[100%] ">
       Hello
-      <form action="/submit" method="post" onSubmit={onSubmitHandler} className='p-8 w-[70%] mx-auto grid'>
-        <div className=' '>
+      <form action="/submit" method="post" onSubmit={onSubmitHandler} className='p-8 w-[60%] grid  '>
+        <div className=''>
           <div className="space-y-12  ">
 
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">User Detail</h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
 
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="mt-10 gap-x-6 gap-y-8 sm:grid-cols-6 grid grid-rows-4 grid-flow-col gap-4">
+
                 <div className="sm:col-span-3">
                   <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                     Nome
@@ -107,15 +108,19 @@ export default function AddUser() {
                     />
                   </div>
                 </div>
-                <div className="sm:col-span-3">
-                  <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-                    CogNome
+
+              
+
+               
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
+                  <label htmlFor="nationality" className="block text-sm font-medium leading-6 text-gray-900">
+                    Nazionalita
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="last-name"
-                      id="last-name"
+                      name="nationality"
+                      id="nationality"
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -123,7 +128,8 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
+
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="gender" className="block text-sm font-medium leading-6 text-gray-900">
                     Sesso
                   </label>
@@ -144,8 +150,25 @@ export default function AddUser() {
                   </div>
                 </div>
 
+                <div className="sm:col-span-4 mt-2 gap-x-6 gap-y-8">
+                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                    Email address
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      onChange={inputHandler}
+                      autoComplete="email"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-                <div className="sm:col-span-3">
+
+
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="child" className="block text-sm font-medium leading-6 text-gray-900">
                     Figli
                   </label>
@@ -161,15 +184,18 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
-                  <label htmlFor="nationality" className="block text-sm font-medium leading-6 text-gray-900">
-                    Nazionalita
+               
+
+               
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
+                  <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    CogNome
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="nationality"
-                      id="nationality"
+                      name="last-name"
+                      id="last-name"
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -177,7 +203,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="bornOn" className="block text-sm font-medium leading-6 text-gray-900">
                     Nato il
                   </label>
@@ -193,7 +219,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="maritialStatus" className="block text-sm font-medium leading-6 text-gray-900">
                     Stato Civile
                   </label>
@@ -209,7 +235,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-3 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="natoa" className="block text-sm font-medium leading-6 text-gray-900">
                     Natoa
                   </label>
@@ -225,65 +251,11 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-4">
-                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      onChange={inputHandler}
-                      autoComplete="email"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-                <div className="col-span-full">
-                  <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-                    About
-                  </label>
-                  <div className="mt-2">
-                    <textarea
-                      id="about"
-                      name="about"
-                      onChange={inputHandler}
-                      rows={3}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      defaultValue={''}
-                    />
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
-                </div>
+               
+               
 
-                
-                <div className="col-span-full">
-                  <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                    Foto
-                  </label>
-                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                    <div className="text-center">
-                      <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                      <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                        <label
-                          htmlFor="file-upload"
-                          className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                        >
-                          <span>Upload a file</span>
-                          <input
-                            id="uploadFile"
-                            name="uploadFile"
-                            type="file"
-                            onChange={fileInputChangeHandler}
-                            className="sr-only"
-                          />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+
               </div>
             </div>
             <div className="border-b border-gray-900/10 pb-12">
@@ -296,7 +268,7 @@ export default function AddUser() {
 
                 
 
-                <div className="col-span-full">
+                <div className="col-span-full mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
                     Street address
                   </label>
@@ -312,7 +284,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2 sm:col-start-1">
+                <div className="sm:col-span-2 sm:col-start-1 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
                     Citta
                   </label>
@@ -328,7 +300,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
                     Provincia
                   </label>
@@ -344,7 +316,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
                     Cap
                   </label>
@@ -360,7 +332,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2 ">
+                <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 ">
                   <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
                     Via
                   </label>
@@ -376,7 +348,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2 ">
+                <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="pec" className="block text-sm font-medium leading-6 text-gray-900">
                     Pec
                   </label>
@@ -392,7 +364,7 @@ export default function AddUser() {
                   </div>
                 </div>
 
-                <div className="sm:col-span-2 ">
+                <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
                   <label htmlFor="Cell" className="block text-sm font-medium leading-6 text-gray-900">
                     Cellulare
                   </label>
@@ -423,6 +395,65 @@ export default function AddUser() {
             </button>
           </div>
         </div>
+
+        <div className='flex '>
+        <div className='w-[30%] flex-end'>
+                
+
+                
+                <div className="col-span-full mt-2 gap-x-6 gap-y-8">
+                  <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                    Foto
+                  </label> 
+                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <div className="text-center">
+                      <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                      <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <label
+                          htmlFor="file-upload"
+                          className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                        >
+                          <span>Upload a file</span>
+                          <input
+                            id="uploadFile"
+                            name="uploadFile"
+                            type="file"
+                            onChange={fileInputChangeHandler}
+                            className="sr-only"
+                          />
+                        </label>
+                        <p className="pl-1">or drag and drop</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-span-full mt-2 gap-x-6 gap-y-8">
+                  <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                    About
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="about"
+                      name="about"
+                      onChange={inputHandler}
+                      rows={3}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      defaultValue={''}
+                    />
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+                </div>
+
+
+                </div>
+                </div>
+
+
+
+
+
+
       </form>
 
     </section>
