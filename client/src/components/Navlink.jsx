@@ -1,12 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { UserPlusIcon,RocketLaunchIcon,IdentificationIcon,HomeIcon,DocumentIcon, }
  from "@heroicons/react/24/solid";
+ import { useTranslation } from "react-i18next";
 
 
 
 import { useState } from "react";
 
 const NavLinks = (props) => {
+
+  const { t, i18n } = useTranslation();
   const [selectedLink, setSelectedLink] = useState()
   const lis = [
 
@@ -22,7 +25,7 @@ const NavLinks = (props) => {
     },
 
     {
-      title: "People",
+      title: t("People") ,
       linkTo: "people",
       icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },

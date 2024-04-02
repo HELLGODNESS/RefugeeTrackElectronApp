@@ -1,0 +1,32 @@
+{
+  "app_title": "titolo",
+  "language": "lingua",
+  "Name": "Nome",
+  "SurName": "CogName",
+  "Child" : "Figli",
+  "Gender" : "Sesso",
+  "Born on" : "Nato il",
+  "Born in" : "NatoA",
+  "Nationality" : "Nazionalita",
+  "Marital status" : "Stato Civile",
+  "City" : "Citta",
+  "Province" : "Provincia",
+  "Postal Code" : "Cap",
+  "Street" : "Via",
+  "Pec" : "Pec",
+  "Mobile phone" : "Cellulare",
+  "Photo" : "Foto",
+  "About" : "Note",
+  "Save" : "Salva",
+  "User Detail" : "Dettaglio utente",
+  "Address Information" : "Informazioni sull'indirizzo",
+  "Cancel" : "Annulla",
+  "Male" : "Maschio",
+  "Female" : "Femmina",
+  "This information will be displayed publicly so be careful what you share." : 
+  "Queste informazioni verranno visualizzate pubblicamente, quindi fai attenzione a ciò che condividi.",
+  "People" : "Persone"
+
+
+ 
+}

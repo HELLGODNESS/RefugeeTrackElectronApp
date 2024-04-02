@@ -1,4 +1,8 @@
 import Router from "./routes";
+import "./i18n";
+
+
+
 function App() {
   return (
     <div>

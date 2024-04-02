@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import DataTable from "../components/DataTable";
-import Paginator from "../components/Paginator";
+import Paginator from "../components/paginator";
 import SectionHeader from "../components/SectionHeader";
 import Dialog from "../components/Dialog";
 
