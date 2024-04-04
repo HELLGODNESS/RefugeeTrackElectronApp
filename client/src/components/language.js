@@ -53,7 +53,7 @@ const LanguageSelector = () => {
           >
             <Menu.Items
               aria-label="menu-item-container"
-              className="z-10 mx-3 origin-top absolute left-[-36px] sm:left-[-25px] md:left-[-25px] top-[42px] xl:left-[-80px] right-0 min-w-max mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+              className=" backdrop: z-10 mx-3 origin-top absolute left-[-36px] sm:left-[-25px] md:left-[-25px] top-[42px] xl:left-[-80px] right-0 min-w-max mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
             >
               <div className="px-1 py-1 " aria-label="menu-items">
                 {countries.map((lng) => {
@@ -61,7 +61,7 @@ const LanguageSelector = () => {
                     <Menu.Item key={lng.code}>
                       <button
                         className={classNames(
-                          "flex items-center space-x-2 px-4 py-2 text-sm cursor-pointer"
+                          "flex items-center space-x-2 px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
                         )}
                         onClick={() => i18n.changeLanguage(lng.code)} // used to change language that needs to be rendered
                         disabled={i18n.language === lng.code}

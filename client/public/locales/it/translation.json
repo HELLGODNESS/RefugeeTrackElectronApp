@@ -25,8 +25,11 @@
   "Female" : "Femmina",
   "This information will be displayed publicly so be careful what you share." : 
   "Queste informazioni verranno visualizzate pubblicamente, quindi fai attenzione a ciò che condividi.",
-  "People" : "Persone"
+  "People" : "Persone",
+  "First Name" : "Nome di battesimo",
+  "Last Name" : "CogNome",
+  "Relation" : "Relazione",
+  "Age" : "Età",
+  "Email Address" : "indirizzo e-mail"
 
-
- 
 }

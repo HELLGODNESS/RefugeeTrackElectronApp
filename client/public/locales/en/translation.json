@@ -25,9 +25,11 @@
   "Male" : "Male",
   "Female" : "Female",
   "This information will be displayed publicly so be careful what you share." : 
-  "This information will be displayed publicly so be careful what you share."
+  "This information will be displayed publicly so be careful what you share.",
+  "First Name" : "First Name",
+  "Last Name" : "Last Name",
+  "Relation" : "Relation",
+  "Age" : "Age"
   
-
-
  
 }
