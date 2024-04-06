@@ -1,16 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --black: #212121;
+  --orange: rgb(219, 92, 28);
+  --yellow: rgb(233, 177, 93);
+  --peach: #ffa064;
+  --skin: #ffe0c7;
+  --white: #ffffff;
+  --gray: #c9cbc9;
+  --dark-gray: #494949;
+  --primary-color: #e9b15c;
+  --primary-color-hover: #e9c26d;
+  --secondary-color: #db5c1c;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.text-xxs {
+  font-size: 0.5rem
+    /* 14px */
+  ;
+  line-height: 1rem;
+}
+
+.selected-flag {
+  background-color: transparent !important;
+}
+
+.myMap>iframe {
+  width: 100% !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* .swiper-button-prev,.swiper-button-next{ */
+/* background-color:  rgb(219, 92, 28); */
+/* color:  rgb(219, 92, 28);
+} */
+.swiper-pagination-bullet {
+  background-color: white !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(233, 177, 93) !important;
+}
+
+/* #background-container {
+  background-image: linear-gradient(
+      rgba(12,49,78,0)0%,
+      rgb(12,49,78)99.79%
+    ),url("./static/images/background.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+/* .notifcation ::-webkit-scrollbar ::-webkit-scrollbar-thumb{ */
+
+.notification::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-right: 1px solid rgb(70, 67, 67);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: gray;
+}
+
+.notification::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  border-right: 1px solid rgb(70, 67, 67);
+  background-color: rgb(95, 95, 95);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+
+@media screen and (min-width:400px) {
+  .swiper-wrapper {
+    justify-content: center;
+  }
 }

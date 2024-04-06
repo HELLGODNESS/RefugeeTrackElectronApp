@@ -1,13 +1,21 @@
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
+const corsConfig = {
+    origin: '*',
+    allowHeaders: ['Content-Type', 'Authorization'],
+    methods: ['OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'],
+};
 // Middleware
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-const usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
+const personRouter = require('./routes/person');
+app.use('/person', personRouter);
 
 // Start the server
 const PORT = process.env.PORT || 4000;
