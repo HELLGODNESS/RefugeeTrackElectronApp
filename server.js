@@ -15,7 +15,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 const personRouter = require('./routes/person');
+const imageRouter = require('./routes/images');
 app.use('/person', personRouter);
+app.use("/file", imageRouter);
 
 // Start the server
 const PORT = process.env.PORT || 4000;

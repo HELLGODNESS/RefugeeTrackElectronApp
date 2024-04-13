@@ -33,6 +33,7 @@ model Person{
   zip String?
   streetAddress String?
   about String?
+  image String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

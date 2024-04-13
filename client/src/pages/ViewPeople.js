@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import SectionHeader from "../components/SectionHeader";
 import Dialog from "../components/Dialog";
 import DataTable from "../components/DataTable";
@@ -18,16 +19,16 @@ const dummyData = [
   { "_id": "10", "Name": "Alex Clark", "Role": "Analyst", "Email": "alex@example.com", "Phone": "+1122334455", "Image": image }
 ];
 
-export default function Users() {
+export default function ViewPeople() {
   // const dispatch = useDispatch();
   const usersReducer = {}
   // useSelector((state) => state.usersReducer);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
-  const tableBodyList = usersReducer?.data?.results || dummyData;
-  const count = usersReducer?.data?.count || 0;
-  const loading = usersReducer?.loading || 0;
 
+  const [tableBodyList, setTableBodyList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [state, setState] = useState({
     tableBodyList: dummyData,
     dialogInfo: {
@@ -46,8 +47,8 @@ export default function Users() {
   }
 
   const [tableHeaders, setTableHeaders] = useState([
-    { id: "_id", label: "ID" },
-    { id: "Name", label: "Name" },
+    { id: "id", label: "ID" },
+    { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     { id: "Role", label: "Role" },
     { id: "Email", label: "Email" },
     { id: "Phone", label: "Phone" },
@@ -57,8 +58,8 @@ export default function Users() {
       component: (data, setData) => (
         <img
           className="w-16 h-auto rounded-full"
-          src={data.Image}
-          // src={`${process.env.REACT_APP_ATLAS_URL}/file/${data.Image && data?.Image    }`}
+          // src={data.Image}
+          src={`http://localhost:4000/file/${data.image && data?.image}`}
           alt="profile"
         />
       ),
@@ -84,21 +85,27 @@ export default function Users() {
   ]);
 
   useEffect(() => {
-    // dispatch(
-    //   getUsers({
-    //     page: page + 1,
-    //     limit: limit,
-    //   })
-    // );
+    setLoading(true)
+    axios.get("http://localhost:4000/person", { params: { page, limit } })
+      .then((res) => {
+        console.log(res);
+        setTableBodyList(res.data.list);
+        setCount(res.data.count);
+        setLoading(false)
+      }).catch((err) => {
+        console.log(err);
+        setLoading(false)
+      });
+
   }, [limit, page]);
 
   return (
     <div className="mt-10">
-      <SectionHeader title={"All Users"}
-        mainPage={"Users"}
-        mainPageLink={"/admin/viewAllUsers"}
+      <SectionHeader title={"All People"}
+        mainPage={"People"}
+        mainPageLink={"/viewPeople"}
         breadCrumbs={[
-          { subPage: "View All Users", link: "/admin/viewAllUsers" }
+          { subPage: "View All People", link: "/viewPeople" }
         ]}
       />
       <Dialog

@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import LanguageSelector from "../components/language";
 import { useTranslation } from "react-i18next";
 import FileUploader from "../components/FileUploader";
-export default function People() {
+import toast from "react-hot-toast";
+export default function AddPeople() {
   const [fieldSets, setFieldSets] = useState([]);
 
   const addFieldSet = () => {
@@ -57,10 +57,24 @@ export default function People() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/person", { ...formData, bornOn: new Date(formData.bornOn) });
+
+      const formState = new FormData();
+      Object.keys(formData).forEach(key => {
+        formState.append(key, formData[key])
+      })
+      console.log(images, images)
+      if (images) {
+        formState.append("SelectedImages", images);
+      }
+
+      await axios.post("http://localhost:4000/person", formState);
+      toast.success("Person Added successfully");
       setFormData({})
+
     } catch (error) {
       console.log(error)
+      toast.error(JSON.stringify(error));
+
     }
     console.log(formData);
   };
@@ -98,6 +112,7 @@ export default function People() {
                       name="firstName"
                       id="firstName"
                       onChange={inputHandler}
+                      value={formData.firstName}
                       autoComplete="given-name"
                       className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
@@ -118,6 +133,8 @@ export default function People() {
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                      value={formData.lastName}
+
                     />
                   </div>
                 </div>
@@ -134,6 +151,7 @@ export default function People() {
                       id="maritalStatus"
                       name="maritalStatus"
                       onChange={inputHandler}
+
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >

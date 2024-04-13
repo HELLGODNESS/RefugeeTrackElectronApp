@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { UserPlusIcon,RocketLaunchIcon,IdentificationIcon,HomeIcon,DocumentIcon, }
+import { UserPlusIcon, RocketLaunchIcon, IdentificationIcon, HomeIcon, DocumentIcon, UsersIcon, }
  from "@heroicons/react/24/solid";
  import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ const NavLinks = (props) => {
 
     {
       title: t("People") ,
-      linkTo: "people",
+      linkTo: "addPeople",
       icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     // {
@@ -66,9 +66,9 @@ const NavLinks = (props) => {
       icon: <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     {
-      title: "User Management",
-      linkTo: "users",
-      icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      title: "View All People",
+      linkTo: "viewPeople",
+      icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     // {
     //   title: "View all Properties",
