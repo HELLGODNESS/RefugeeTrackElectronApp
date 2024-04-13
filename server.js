@@ -18,7 +18,9 @@ const personRouter = require('./routes/person');
 const imageRouter = require('./routes/images');
 app.use('/person', personRouter);
 app.use("/file", imageRouter);
-
+app.use('/healthCheck',(req,res)=>{
+    res.send("Health 100%")
+})
 // Start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
