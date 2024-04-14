@@ -35,6 +35,7 @@ const DataTable = ({
         >
           <thead className="bg-gray-50  w-full ">
             <tr>
+              
               {tableHeaders &&
                 tableHeaders.map((header, index) => (
                   <th
@@ -46,6 +47,7 @@ const DataTable = ({
                   </th>
                 ))}
             </tr>
+            
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white ">
             {/* <!-- Selected: "bg-gray-50" --> */}
@@ -56,6 +58,7 @@ const DataTable = ({
                   key={index}
                 >
                   {tableHeaders &&
+                  
                     tableHeaders.map((col, index) => (
                       <Fragment key={index}>
                         {rowClickEnabled ? (
@@ -68,6 +71,7 @@ const DataTable = ({
                           </td>
                         ) : (
                           <>
+                          
                             <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                               {getColumnComponent(col, row)}
                             </td>
@@ -75,6 +79,7 @@ const DataTable = ({
                         )}
                       </Fragment>
                     ))}
+                    <button className="bg-blue-500 mt-4 p-1 rounded-md text-white">edit</button>
                 </tr>
               ))
               : [...Array(8)].map((val, index) => (

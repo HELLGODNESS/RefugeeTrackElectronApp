@@ -49,6 +49,7 @@ export default function ViewPeople() {
   const [tableHeaders, setTableHeaders] = useState([
     { id: "id", label: "ID" },
     { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
+    { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
     { id: "Role", label: "Role" },
     { id: "Email", label: "Email" },
     { id: "Phone", label: "Phone" },

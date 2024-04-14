@@ -4,8 +4,16 @@ import LanguageSelector from "../components/language";
 import { useTranslation } from "react-i18next";
 import FileUploader from "../components/FileUploader";
 import toast from "react-hot-toast";
-export default function AddPeople() {
+import JsBarcode from "jsbarcode";
+import html2canvas from "html2canvas";
+import { useEffect, useRef } from "react";
+import "./People.css";
+import "./IDCard.css";
+
+export default function People() {
   const [fieldSets, setFieldSets] = useState([]);
+  const [barcodeValue, setBarcodeValue] = useState("");
+  const identityCardRef = useRef(null);
 
   const addFieldSet = () => {
     const newId = fieldSets.length + 1;
@@ -46,42 +54,93 @@ export default function AddPeople() {
     }));
   };
 
-  const fileInputChangeHandler = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      uploadFile: file,
-    }));
+  // const onSubmitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post("http://localhost:4000/person", { ...formData, bornOn: new Date(formData.bornOn) });
+  //     setFormData({})
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   console.log(formData);
+  // };
+
+  const generateIdentityCard = async () => {
+    const canvas = await html2canvas(identityCardRef.current);
+    const imageData = canvas.toDataURL("image/png");
+    const printableWindow = window.open("", "_blank");
+    printableWindow.document.write(
+      `<img src="${imageData}" style="width:30%" />`
+    );
+    printableWindow.document.close();
+    printableWindow.print();
   };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-
+      // Define formState and make the POST request
       const formState = new FormData();
-      Object.keys(formData).forEach(key => {
-        formState.append(key, formData[key])
-      })
-      console.log(images, images)
-      if (images) {
-        formState.append("SelectedImages", images);
-      }
+      Object.keys(formData).forEach((key) => {
+        formState.append(key, formData[key]);
+      });
+      const response = await axios.post(
+        "http://localhost:4000/person",
+        formState
+      );
 
-      await axios.post("http://localhost:4000/person", formState);
+      // Extract the unique identifier (e.g., user ID) from the response
+      const userId = response.data.id;
+      setBarcodeValue(userId);
+
+      // Generate and print the identity card
+      generateIdentityCard();
+
+      // Reset form data after successful request processing
+      setFormData({});
       toast.success("Person Added successfully");
-      setFormData({})
 
+      // Calculate new barcode value after setting barcodeValue
+      const newBarcodeValue = calculateBarcodeValue();
+      setBarcodeValue(newBarcodeValue); // Update barcode value
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(JSON.stringify(error));
-
     }
-    console.log(formData);
   };
+
+  const calculateBarcodeValue = () => {
+    // Here you can derive the barcode value based on user's data
+    // For example, concatenate user's ID, first name, last name, etc.
+    const { id, firstName, lastName, cell, streetAddress, city } = formData;
+    // Pad the ID with leading zeros if it's less than 10
+    const paddedId = id < 10 ? `0${id}` : id;
+    return `${paddedId}-${firstName}-${lastName}-${cell}-${streetAddress}-${city}`;
+  };
+
+  // Calculate new barcode value whenever formData changes
+  useEffect(() => {
+    const newBarcodeValue = calculateBarcodeValue();
+    setBarcodeValue(newBarcodeValue);
+  }, [formData]);
+
+  useEffect(() => {
+    // Initialize JsBarcode after component is mounted
+    JsBarcode("#barcode", "barcode value", {
+      format: "CODE128",
+      width: 1,
+      height: 30,
+      displayValue: false,
+    });
+    const imageElement = identityCardRef.current.querySelector("#userImage");
+    if (imageElement && images && images.length > 0) {
+      const imageUrl = URL.createObjectURL(images[0]);
+      imageElement.src = imageUrl;
+    }
+  }, [barcodeValue, images]); // Include barcodeValue and images in the dependency array
 
   return (
     <section className=" bg-white  overflow-scroll h-screen w-[100%] ">
-
       <form className=" lg:col-span-9" action="#" method="POST">
         {/* Profile section */}
         <div className="px-4 py-6 sm:p-6 lg:pb-8">
@@ -134,7 +193,6 @@ export default function AddPeople() {
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                       value={formData.lastName}
-
                     />
                   </div>
                 </div>
@@ -150,8 +208,8 @@ export default function AddPeople() {
                     <select
                       id="maritalStatus"
                       name="maritalStatus"
+                      value={formData.maritalStatus}
                       onChange={inputHandler}
-
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
@@ -160,7 +218,6 @@ export default function AddPeople() {
                       <option value={"Widowed"}>{t("Widowed")}</option>
                       <option value={"Divorced"}>{t("Divorced")}</option>
                     </select>
-
                   </div>
                 </div>
 
@@ -184,7 +241,6 @@ export default function AddPeople() {
                     </select>
                   </div>
                 </div>
-
 
                 <div className="">
                   <label
@@ -223,13 +279,13 @@ export default function AddPeople() {
                     />
                   </div>
                 </div>
-
-
               </div>
 
-
               <div>
-                <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="about"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   {t("About")}
                 </label>
                 <div className="mt-2">
@@ -239,14 +295,16 @@ export default function AddPeople() {
                     onChange={inputHandler}
                     rows={3}
                     className="mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
-                    defaultValue={''}
+                    defaultValue={""}
                   />
                 </div>
-
               </div>
             </div>
             <div className="mt-6 flex-grow lg:ml-6 lg:mt-0 lg:flex-shrink-0 lg:flex-grow-0">
-              <p className="text-sm font-medium leading-6 text-gray-900" aria-hidden="true">
+              <p
+                className="text-sm font-medium leading-6 text-gray-900"
+                aria-hidden="true"
+              >
                 {t("Photo")}
               </p>
               <div className="mt-2 lg:hidden">
@@ -255,7 +313,11 @@ export default function AddPeople() {
                     className="inline-block h-12 w-12 flex-shrink-0 overflow-hidden rounded-full"
                     aria-hidden="true"
                   >
-                    <img className="h-full w-full rounded-full" src={"user.imageUrl"} alt="" />
+                    <img
+                      className="h-full w-full rounded-full"
+                      src={"user.imageUrl"}
+                      alt=""
+                    />
                   </div>
                   <div className="relative ml-5">
                     <input
@@ -276,24 +338,38 @@ export default function AddPeople() {
               </div>
               <div className="relative hidden overflow-hidden rounded-full lg:block">
                 <div className="col-span-full ">
-                  {images ?
-                    <div className='relative  flex justify-center rounded-full border border-dashed border-gray-900/25  text-center'>
+                  {images ? (
+                    <div className="relative  flex justify-center rounded-full border border-dashed border-gray-900/25  text-center">
                       <img
                         alt="selected images"
                         className="w-72 h-72  rounded-full"
                         src={URL?.createObjectURL(images)}
                       />
                       <div className="absolute inset-0 flex  justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100">
-                        <button onClick={() => setImages(null)} className="bg-red-500 text-white rounded-full p-2 hover:bg-red-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <button
+                          onClick={() => setImages(null)}
+                          className="bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
                           </svg>
                         </button>
                       </div>
                     </div>
-                    :
+                  ) : (
                     <FileUploader file={images} setFile={setImages} />
-                  }
+                  )}
                 </div>
               </div>
             </div>
@@ -478,7 +554,6 @@ export default function AddPeople() {
                 />
               </div>
             </div>
-
           </div>
         </div>
         <div className="mt-12 px-4 sm:px-6">
@@ -492,7 +567,6 @@ export default function AddPeople() {
               </p>
             </div>
             <div>
-
               <button
                 type="button"
                 onClick={addFieldSet}
@@ -584,13 +658,68 @@ export default function AddPeople() {
                   onClick={() => removeFieldSet(id)}
                   className="w-6 h-6 text-right  self-center"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-black w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="text-black w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                    />
                   </svg>
-
                 </button>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="container" ref={identityCardRef} id="identity-card">
+          <div className="padding">
+            <div className="font">
+              <div className="companyname ">
+                Card <br />
+                <span class="tab">Management</span>
+              </div>
+              <div className="top">
+                {images && (
+                  <div className="">
+                    <img src={URL.createObjectURL(images)} alt="User" />
+                  </div>
+                )}
+              </div>
+              <div class="">
+                <div className="ename">
+                  <p class="p1">
+                    <b>
+                      {formData.firstName} {formData.lastName}
+                    </b>
+                  </p>
+                </div>
+                <div className="edetails">
+                  <p>
+                    <b>Mobile No : </b>
+                    {formData.cell}
+                  </p>
+                  <p>
+                    <b>DOB : </b>
+                    {formData.bornOn}
+                  </p>
+                  <div class="Address">
+                    <b>Address : </b>
+                    {formData.streetAddress}
+                    {formData.city}{" "}
+                  </div>
+                </div>
+                <div className="mt-[13rem] ml-3">
+                  <svg id="barcode" class=""></svg>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -601,15 +730,6 @@ export default function AddPeople() {
         onSubmit={onSubmitHandler}
         className="p-8  grid w-[97%] "
       >
-
-        {/* ####################################Child Form ######################################################### */}
-
-
-
-        {/* Button to add new field set */}
-
-
-
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
