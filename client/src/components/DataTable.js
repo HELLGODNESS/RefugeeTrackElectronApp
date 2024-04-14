@@ -79,7 +79,6 @@ const DataTable = ({
                         )}
                       </Fragment>
                     ))}
-                    <button className="bg-blue-500 mt-4 p-1 rounded-md text-white">edit</button>
                 </tr>
               ))
               : [...Array(8)].map((val, index) => (
