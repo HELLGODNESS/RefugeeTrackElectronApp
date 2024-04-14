@@ -5,15 +5,16 @@ const path = require('path')
 module.exports = {
     async getAllPersons(req, res) {
         try {
-            const { page = 0, limit = 20 } = req.params;
+            const { page = 0, limit = 20 } = req.query;
             const persons = await client.person.findMany({
                 skip: +page < 1 ? 0 : +page * limit,
-                take: limit,
+                take: +limit,
             });
             const count = await client.person.count();
 
             res.json({ list: persons, count });
         } catch (error) {
+            console.log(error)
             res.status(500).json({ message: error.message });
         }
     },
