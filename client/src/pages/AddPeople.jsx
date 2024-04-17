@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 import JsBarcode from "jsbarcode";
 import html2canvas from "html2canvas";
 import { useEffect, useRef } from "react";
-import "./People.css";
-import "./IDCard.css";
+import "../styles/People.css";
+import "../styles/IDCard.css";
 
 export default function People() {
   const [fieldSets, setFieldSets] = useState([]);

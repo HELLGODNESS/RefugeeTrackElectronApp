@@ -4,6 +4,9 @@ import SectionHeader from "../components/SectionHeader";
 import Dialog from "../components/Dialog";
 import DataTable from "../components/DataTable";
 import Paginator from "../components/paginator";
+import { EyeIcon, IdentificationIcon, PencilIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Modal from "../components/Modal";
+import IDCard from "../components/IDCard";
 
 const image = 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 const dummyData = [
@@ -29,6 +32,8 @@ export default function ViewPeople() {
   const [tableBodyList, setTableBodyList] = useState([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [cardModalOpen, setCardModalOpen] = useState(false)
+
   const [state, setState] = useState({
     tableBodyList: dummyData,
     dialogInfo: {
@@ -64,7 +69,7 @@ export default function ViewPeople() {
       label: "Image",
       component: (data, setData) => (
         <img
-          className="w-16 h-auto rounded-full"
+          className="w-16 h-16 rounded-full"
           // src={data.Image}
           src={`http://localhost:4000/file/${data.image && data?.image}`}
           alt="profile"
@@ -75,16 +80,34 @@ export default function ViewPeople() {
       id: "actions",
       label: "",
       component: (data, setData) => (
-        <div className="flex space-x-3 !text-right">
+        <div className="space-x-3 text-right mr-1.5">
           <button
             className=" no-focus"
             title="Delete"
             onClick={(e) => deleteFromTable(data)}
           >
-            <i
-              className="fas fa-times text-[color:var(--primary-color)]"
-              aria-hidden="true"
-            ></i>
+            <EyeIcon className="w-5 h-5" />
+          </button>
+          <button
+            className=" no-focus"
+            title="Delete"
+            onClick={(e) => setCardModalOpen(data)}
+          >
+            <IdentificationIcon className="w-5 h-5" />
+          </button>
+          <button
+            className=" no-focus"
+            title="Delete"
+            onClick={(e) => deleteFromTable(data)}
+          >
+            <PencilIcon className="w-5 h-5" />
+          </button>
+          <button
+            className=" no-focus"
+            title="Delete"
+            onClick={(e) => deleteFromTable(data)}
+          >
+            <TrashIcon className="w-5 h-5" />
           </button>
         </div>
       ),
@@ -125,6 +148,20 @@ export default function ViewPeople() {
         onTrue={(e) => deleteFromTable(e)}
         dialogInfo={state.dialogInfo}
       />
+      <Modal isModalOpen={!!cardModalOpen} setModalOpen={setCardModalOpen}>
+        <div className='bg-white text-left text-black w-[500px] md:w-[600px] rounded-lg my-8'>
+          <div className="border-b flex justify-between items-center px-6 py-4">
+            <h4 className="text-base text-gray-900 font-semibold">
+              Identity Card
+            </h4>
+            <XMarkIcon onClick={() => setCardModalOpen(false)} className="w-5 h-5 text-gray-600 cursor-pointer" />
+          </div>
+          <div className='rounded px-3 py-1 bg-blue-50 flex items-center gap-x-1 m-6 mb-0'>
+            <IDCard {...cardModalOpen} />
+          </div>
+
+        </div>
+      </Modal>
       <DataTable
         isLoading={loading}
         tableHeadersData={tableHeaders}
