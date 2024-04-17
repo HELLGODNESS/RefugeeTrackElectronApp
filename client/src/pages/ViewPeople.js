@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
 import SectionHeader from "../components/SectionHeader";
 import Dialog from "../components/Dialog";
@@ -50,9 +50,15 @@ export default function ViewPeople() {
     { id: "id", label: "ID" },
     { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
-    { id: "Role", label: "Role" },
-    { id: "Email", label: "Email" },
-    { id: "Phone", label: "Phone" },
+    { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
+    { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
+    { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
+    { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
+    { id: "streetAddress", label: "Address", component: (data) => <>{data.streetAddress || ''} </> },
+    { id: "pec", label: "Pec", component: (data) => <>{data.pec || ''} </> },
+    { id: "bornOn", label: "Born On", component: (data) => <>{data.bornOn || ''} </> },
+    { id: "emailAddress", label: "Email" , component: (data) => <>{data.emailAddress || ''} </> } ,
+    { id: "cell", label: "Phone" , component: (data) => <>{data.cell || ''}</> },
     {
       id: "Image",
       label: "Image",

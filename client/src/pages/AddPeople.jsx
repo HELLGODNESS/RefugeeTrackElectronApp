@@ -232,6 +232,7 @@ export default function People() {
                     <select
                       id="gender"
                       name="gender"
+                      value={formData.gender}
                       onChange={inputHandler}
                       autoComplete="Gender"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
@@ -254,6 +255,7 @@ export default function People() {
                       type="text"
                       name="nationality"
                       id="nationality"
+                      value={formData.nationality}
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -273,6 +275,7 @@ export default function People() {
                       type="date"
                       name="bornOn"
                       id="bornOn"
+                      value={formData.bornOn}
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -390,6 +393,7 @@ export default function People() {
                   name="emailAddress"
                   type="email"
                   onChange={inputHandler}
+                  value={formData.emailAddress}
                   autoComplete="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
@@ -407,6 +411,7 @@ export default function People() {
                   type="text"
                   name="child"
                   id="child"
+                  value={formData.child}
                   onChange={inputHandler}
                   autoComplete="family-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -425,6 +430,7 @@ export default function People() {
                   type="text"
                   name="bornIn"
                   id="bornIn"
+                  value={formData.bornIn}
                   onChange={inputHandler}
                   autoComplete="family-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -443,6 +449,7 @@ export default function People() {
                   type="text"
                   name="pec"
                   id="pec"
+                  value={formData.pec}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -462,6 +469,7 @@ export default function People() {
                   type="text"
                   name="cell"
                   id="cell"
+                  value={formData.cell}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -491,6 +499,7 @@ export default function People() {
                   type="text"
                   name="city"
                   id="city"
+                  value={formData.city}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -548,6 +557,7 @@ export default function People() {
                   type="text"
                   name="streetAddress"
                   id="streetAddress"
+                  value={formData.streetAddress}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
