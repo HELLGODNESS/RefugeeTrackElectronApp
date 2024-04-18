@@ -3,6 +3,7 @@ import Layout from "../layout";
 import Services from "../pages/Services";
 import AddPeople from "../pages/AddPeople";
 import ViewPeople from "../pages/ViewPeople";
+import Home from "../pages/Home";
 
 export default function Router() {
   return useRoutes([
@@ -16,7 +17,7 @@ export default function Router() {
         },
         {
           path: "Home",
-          element: <></>
+          element: <Home />
           // element: <Home />,
         },
         {

@@ -41,7 +41,6 @@ export default function People() {
     country: "",
     streetAddress: "",
     city: "",
-    region: "",
     zip: "",
     pec: "",
     cell: "",
@@ -54,16 +53,16 @@ export default function People() {
     }));
   };
 
-  // const onSubmitHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await axios.post("http://localhost:4000/person", { ...formData, bornOn: new Date(formData.bornOn) });
-  //     setFormData({})
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   console.log(formData);
-  // };
+  //   // const onSubmitHandler = async (e) => {
+  //   //   e.preventDefault();
+  //   //   try {
+  //   //     await axios.post("http://localhost:4000/person", { ...formData, bornOn: new Date(formData.bornOn) });
+  //   //     setFormData({})
+  //   //   } catch (error) {
+  //   //     console.log(error)
+  //   //   }
+  //   //   console.log(formData);
+  //   // };
 
   const generateIdentityCard = async () => {
     const canvas = await html2canvas(identityCardRef.current);
@@ -476,6 +475,26 @@ export default function People() {
                 />
               </div>
             </div>
+
+            {/* <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
+              <label
+                htmlFor="religion"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Religion")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="religion"
+                  id="religion"
+                  value={formData.religion}
+                  onChange={inputHandler}
+                  autoComplete="address-level2"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-12 border-b px-4 sm:px-6 pb-12">
@@ -539,6 +558,7 @@ export default function People() {
                   name="zip"
                   id="zip"
                   onChange={inputHandler}
+                  value={formData.zip}
                   autoComplete="postal-code"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />

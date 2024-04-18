@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Paginator = ({ limit = 20, setLimit, page = 0, setPage, total = 20 }) => {
+const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
   const [pageNumbers, setPageNumbers] = useState([
     ...Array(Math.ceil(total / limit)),
   ]);

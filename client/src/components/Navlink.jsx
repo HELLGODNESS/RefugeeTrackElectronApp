@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { UserPlusIcon, RocketLaunchIcon, IdentificationIcon, HomeIcon, DocumentIcon, UsersIcon, }
  from "@heroicons/react/24/solid";
  import { useTranslation } from "react-i18next";
+ 
 
 
 
@@ -34,11 +35,7 @@ const NavLinks = (props) => {
     //   linkTo:"",
     //   icon: <i className="fas fa-smile text-lg"></i>
     // },
-    {
-      title: "Emissione Tessera",
-      linkTo:"",
-      icon: <IdentificationIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
-    },
+   
     // {
     //   title: "Breakfast",
     //   linkTo:"",
