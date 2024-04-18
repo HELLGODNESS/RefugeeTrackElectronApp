@@ -12,7 +12,7 @@ function SectionHeader({
 
   const navigate = useNavigate()
   return (
-    <div className="  px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between mb-6">
+    <div className="  px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
       <div className="min-w-0 flex-1">
         <nav className="flex" aria-label="Breadcrumb">
           <ol role="list" className="flex items-center space-x-4">

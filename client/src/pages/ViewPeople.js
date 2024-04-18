@@ -134,26 +134,17 @@ export default function ViewPeople() {
 
   const [tableHeaders, setTableHeaders] = useState([
     { id: "id", label: "ID" },
-    {
-      id: "Name",
-      label: "Name",
-      component: (data) => (
-        <>
-          {data.firstName || ""} {data.lastName || ""}
-        </>
-      ),
-    },
+    { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     // { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
-    // { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
+    { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
     // { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
-    // { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
-    // { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
+    { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
+    { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
     // { id: "streetAddress", label: "Address", component: (data) => <>{data.streetAddress || ''} </> },
     // { id: "pec", label: "Pec", component: (data) => <>{data.pec || ''} </> },
     // { id: "bornOn", label: "Born On", component: (data) => <>{data.bornOn || ''} </> },
-    // { id: "emailAddress", label: "Email" , component: (data) => <>{data.emailAddress || ''} </> } ,
-    // { id: "cell", label: "Phone" , component: (data) => <>{data.cell || ''}</> },
-    // { id: "religion", label: "Religion" , component: (data) => <>{data.religion || ''}</> },
+    { id: "emailAddress", label: "Email", component: (data) => <>{data.emailAddress || ''} </> },
+    { id: "cell", label: "Phone", component: (data) => <>{data.cell || ''}</> },
     {
       id: "Image",
       label: "Image",

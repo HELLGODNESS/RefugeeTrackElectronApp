@@ -5,12 +5,23 @@ const path = require('path')
 module.exports = {
     async getAllPersons(req, res) {
         try {
-            const { page = 0, limit = 20 } = req.query;
+            const { page = 0, limit = 20, search } = req.query;
+            const where = {
+                ...(+search >= 1 ? { id: +search } : {
+                    OR: [
+                        { firstName: { contains: search } },
+                        { lastName: { contains: search } },
+                        { emailAddress: { contains: search } },
+                        { cell: { contains: search } },
+                    ],
+                })
+            }
             const persons = await client.person.findMany({
+                where,
                 skip: +page < 1 ? 0 : +page * limit,
                 take: +limit,
             });
-            const count = await client.person.count();
+            const count = await client.person.count({ where });
 
             res.json({ list: persons, count });
         } catch (error) {
