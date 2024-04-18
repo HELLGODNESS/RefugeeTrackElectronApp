@@ -28,7 +28,7 @@ function SideDrawer(props) {
         className={`relative flex ${drawerIsOpen ? "justify-between" : "justify-center"
           } text-gray-300 font-semibold p-4`}
       >
-        <h2 className="text-xl"><img src={config.contactDetails.logo} className="w-10" /></h2>
+        <h2 className="text-xl"><img src={'logo.png'} className={drawerIsOpen ? "w-10" : 'w-0'} /></h2>
         <button
           className="main-navigation__menu-btn absolute bg-gray-900 px-4 right-1 w-12 h-5 flex flex-col justify-around cursor-pointer"
           onClick={toggleDrawer}
