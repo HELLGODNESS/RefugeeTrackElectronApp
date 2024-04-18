@@ -44,7 +44,7 @@ function UserData(props) {
     <React.Fragment>
       <article
         ref={identityCardRef}
-        className=" bg-white shadow-lg rounded-lg overflow-hidden m-auto w-full"
+        className=" bg-white shadow-lg rounded-lg overflow-hidden m-auto w-full pb-4"
       >
         {/* Profile header */}
         <div>

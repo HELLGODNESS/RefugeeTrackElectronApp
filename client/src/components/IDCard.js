@@ -11,7 +11,7 @@ function IDCard(props) {
     <React.Fragment>
       <div ref={identityCardRef}>
         <div>
-          <div className="font">
+          <div className="font ">
             <div className="companyname ">
               Card <br />
               <span class="tab">Management</span>
@@ -56,7 +56,7 @@ function IDCard(props) {
                   </div>
                 )}
               </div>
-              <div className="mt-[13rem] ml-3">
+              <div className="z-1 mt-5 ml-3">
                 <svg id="barcode" class=""></svg>
               </div>
             </div>

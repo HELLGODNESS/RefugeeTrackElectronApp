@@ -9,6 +9,7 @@ import {
   EyeIcon,
   IdentificationIcon,
   PencilIcon,
+  PrinterIcon,
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -16,95 +17,10 @@ import Modal from "../components/Modal";
 import IDCard from "../components/IDCard";
 import UserData from "../components/UserData";
 
-const image =
-  "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
-const dummyData = [
-  {
-    _id: "1",
-    Name: "John Doe",
-    Role: "Developer",
-    Email: "john@example.com",
-    Phone: "+1234567890",
-    Image: image,
-  },
-  {
-    _id: "2",
-    Name: "Jane Smith",
-    Role: "Designer",
-    Email: "jane@example.com",
-    Phone: "+9876543210",
-    Image: image,
-  },
-  {
-    _id: "3",
-    Name: "Alice Johnson",
-    Role: "Manager",
-    Email: "alice@example.com",
-    Phone: "+1122334455",
-    Image: image,
-  },
-  {
-    _id: "4",
-    Name: "Bob Brown",
-    Role: "Engineer",
-    Email: "bob@example.com",
-    Phone: "+9988776655",
-    Image: image,
-  },
-  {
-    _id: "5",
-    Name: "Eva Wilson",
-    Role: "Analyst",
-    Email: "eva@example.com",
-    Phone: "+5544332211",
-    Image: image,
-  },
-  {
-    _id: "6",
-    Name: "Michael Johnson",
-    Role: "Developer",
-    Email: "michael@example.com",
-    Phone: "+3322114455",
-    Image: image,
-  },
-  {
-    _id: "7",
-    Name: "Sarah Miller",
-    Role: "Designer",
-    Email: "sarah@example.com",
-    Phone: "+1122339988",
-    Image: image,
-  },
-  {
-    _id: "8",
-    Name: "David Lee",
-    Role: "Manager",
-    Email: "david@example.com",
-    Phone: "+9988773322",
-    Image: image,
-  },
-  {
-    _id: "9",
-    Name: "Emily Brown",
-    Role: "Engineer",
-    Email: "emily@example.com",
-    Phone: "+2233445566",
-    Image: image,
-  },
-  {
-    _id: "10",
-    Name: "Alex Clark",
-    Role: "Analyst",
-    Email: "alex@example.com",
-    Phone: "+1122334455",
-    Image: image,
-  },
-];
 
 export default function ViewPeople() {
-  // const dispatch = useDispatch();
-  const usersReducer = {};
-  // useSelector((state) => state.usersReducer);
+
+
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
   const identityCardRef = useRef(null);
@@ -112,11 +28,11 @@ export default function ViewPeople() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [cardModalOpen, setCardModalOpen] = useState(false);
-  const [peopleData, setpeopleData] = useState(false);
+  const [peopleData, setPeopleData] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const [state, setState] = useState({
-    tableBodyList: dummyData,
+    tableBodyList: tableBodyList,
     dialogInfo: {
       isOpened: false,
       text: "",
@@ -152,7 +68,7 @@ export default function ViewPeople() {
         <img
           className="w-16 h-16 rounded-full"
           // src={data.Image}
-          src={`http://localhost:4000/file/${data.image && data?.image}`}
+          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'} 
           alt="profile"
         />
       ),
@@ -165,7 +81,7 @@ export default function ViewPeople() {
           <button
             className=" no-focus"
             title="User Data"
-            onClick={(e) => setpeopleData(data)}
+            onClick={(e) => setPeopleData(data)}
           >
             <EyeIcon className="w-5 h-5" />
           </button>
@@ -199,7 +115,7 @@ export default function ViewPeople() {
     setLoading(true);
     axios
       .get("http://localhost:4000/person", {
-        params: { page, limit, searchQuery },
+        params: { page, limit, search: searchQuery },
       }) // Pass searchQuery to API call
       .then((res) => {
         setTableBodyList(res.data.list);
@@ -267,7 +183,7 @@ export default function ViewPeople() {
         dialogInfo={state.dialogInfo}
       />
       <Modal isModalOpen={!!cardModalOpen} setModalOpen={setCardModalOpen}>
-        <div className="bg-white text-left text-black w-[500px] md:w-[500px] rounded-lg my-8">
+        <div className="bg-white text-left text-black w-[250px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
             <h4 className="text-base text-gray-900 font-semibold">
               Identity Card
@@ -279,40 +195,29 @@ export default function ViewPeople() {
           </div>
           <div
             ref={identityCardRef}
-            className="rounded px-3 py-1 bg-blue-50 flex items-center gap-x-1 m-6 mb-0 pl-[8rem]"
+            className="rounded px-3 py-1  items-center "
           >
             <IDCard {...cardModalOpen} />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-8 h-8 cursor-pointer mt-[19rem]"
-              onClick={handlePrint}
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"
-              />
-            </svg>
+
           </div>
+          <button className="ml-4 inline-flex gap-2 w-[88%] rounded-md bg-indigo-600  items-center text-center justify-center my-4 text-sm font-semibold py-1 text-white z-100" onClick={handlePrint}>
+            Print
+            <PrinterIcon className="w-5 h-5" />
+          </button>
         </div>
       </Modal>
 
-      <Modal isModalOpen={!!peopleData} setModalOpen={setpeopleData}>
+      <Modal isModalOpen={!!peopleData} setModalOpen={setPeopleData}>
         <div className="bg-white text-left text-black w-[600px] md:w-[700px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
             <h4 className="text-base text-gray-900 font-semibold">User Data</h4>
             <XMarkIcon
-              onClick={() => setpeopleData(false)}
+              onClick={() => setPeopleData(false)}
               className="w-5 h-5 text-gray-600 cursor-pointer"
             />
           </div>
-          <div className="rounded px-3 py-1 bg-blue-50 flex items-center gap-x-1 m-6 mb-0 ">
-            <UserData {...peopleData} />
-          </div>
+
+          <UserData {...peopleData} />
         </div>
       </Modal>
 
