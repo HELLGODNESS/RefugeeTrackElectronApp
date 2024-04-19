@@ -38,7 +38,7 @@ function IDCard(props) {
               <div className="edetails">
                 {cell && (
                   <p>
-                    <b>Mobile No : </b>
+                    <b>Numero di telefono : </b>
                     {cell}
                   </p>
                 )}

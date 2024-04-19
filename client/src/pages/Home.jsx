@@ -4,11 +4,11 @@ import React from 'react'
 export default function Home() {
 
   const cards = [
-    { name: 'CAFETERIA', href: '#', icon: ScaleIcon, amount: '0' },
-    { name: 'TAKEAWAY PACKAGE', href: '#', icon: ScaleIcon, amount: '0' },
-    { name: 'SHOWERS', href: '#', icon: ScaleIcon, amount: '0' },
-    { name: 'COVERS', href: '#', icon: ScaleIcon, amount: '0' },
-    { name: 'MEDICINES', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'MENSA', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'PACCO ASPORTO', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'DOCCIE', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'COPERTE', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'MEDICINE', href: '#', icon: ScaleIcon, amount: '0' },
     // More items...
   ]
     return (

@@ -42,7 +42,7 @@ const NavLinks = (props) => {
     //   icon:<i className="fas fa-bread-slice	text-lg"></i>
     // },
     {
-      title: "Services",
+      title: "Servizi",
       linkTo:"services",
       icon:<RocketLaunchIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
@@ -63,7 +63,7 @@ const NavLinks = (props) => {
       icon: <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },
     {
-      title: "View All People",
+      title: "Utenti",
       linkTo: "viewPeople",
       icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
     },

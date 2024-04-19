@@ -2,11 +2,11 @@
   "app_title": "titolo",
   "language": "lingua",
   "Name": "Nome",
-  "SurName": "CogName",
+  "SurName": "Cognome",
   "Child" : "Figli",
   "Gender" : "Sesso",
   "Born on" : "Nato il",
-  "Born in" : "NatoA",
+  "Born in" : "Luogo di Nascita",
   "Nationality" : "Nazionalita",
   "Marital status" : "Stato Civile",
   "City" : "Citta",
@@ -26,10 +26,11 @@
   "This information will be displayed publicly so be careful what you share." : 
   "Queste informazioni verranno visualizzate pubblicamente, quindi fai attenzione a ciò che condividi.",
   "People" : "Persone",
-  "First Name" : "Nome di battesimo",
-  "Last Name" : "CogNome",
+  "First Name" : "Nome",
+  "Last Name" : "Cognome",
   "Relation" : "Relazione",
   "Age" : "Età",
+  "Children Information":"Informazioni sui Figli",
   "Email Address" : "indirizzo e-mail"
 
 }

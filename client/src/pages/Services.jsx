@@ -111,11 +111,11 @@ function Services() {
               className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
             >
 
-              <option value={"CAFETERIA"}>{t("Cafeteria")}</option>
-              <option value={"TAKEAWAY_PACKAGE"}>{t("Takeaway package")}</option>
-              <option value={"SHOWERS"}>{t("Showers")}</option>
-              <option value={"COVERS"}>{t("Covers")}</option>
-              <option value={"MEDICINES"}>{t("Medicines")}</option>
+              <option value={"CAFETERIA"}>{t("MENSA")}</option>
+              <option value={"TAKEAWAY_PACKAGE"}>{t("PACCO D'ASPORTO")}</option>
+              <option value={"SHOWERS"}>{t("DOCCIE")}</option>
+              <option value={"COVERS"}>{t("COPERTE")}</option>
+              <option value={"MEDICINES"}>{t("MEDICINE")}</option>
             </select>
 
             {/* <button type="button" class="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white whitespace-nowrap shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Start Session</button> */}

@@ -151,7 +151,7 @@ export default function People() {
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
             {t(
-              "This information will be displayed publicly so be careful what you share."
+              "Metti tutti i dati dell'utente"
             )}
           </p>
           <div className="mt-6 flex flex-col lg:flex-row">
@@ -212,10 +212,10 @@ export default function People() {
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
-                      <option value={"Single"}>{t("Single")}</option>
-                      <option value={"Married"}>{t("Married")}</option>
-                      <option value={"Widowed"}>{t("Widowed")}</option>
-                      <option value={"Divorced"}>{t("Divorced")}</option>
+                      <option value={"Single"}>{t("Celibe")}</option>
+                      <option value={"Married"}>{t("Sposato")}</option>
+                      <option value={"Widowed"}>{t("Vedovo/a")}</option>
+                      <option value={"Divorced"}>{t("Divorziato")}</option>
                     </select>
                   </div>
                 </div>
@@ -281,26 +281,149 @@ export default function People() {
                     />
                   </div>
                 </div>
-              </div>
-
-              <div>
+              <div className="">
                 <label
-                  htmlFor="about"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="bornIn"
+                className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  {t("About")}
+                {t("Born in")}
                 </label>
                 <div className="mt-2">
-                  <textarea
-                    id="about"
-                    name="about"
-                    onChange={inputHandler}
-                    rows={3}
-                    className="mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
-                    defaultValue={""}
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="bornIn"
+                  id="bornIn"
+                  value={formData.bornIn}
+                  onChange={inputHandler}
+                  autoComplete="family-name"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
               </div>
+            </div>
+            
+            <div className="">
+              <label
+                htmlFor="child"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Child")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="number"
+                  name="child"
+                  id="child"
+                  min="1" max="100"
+                  value={formData.child}
+                  onChange={inputHandler}
+                  autoComplete="Numero di figli"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="">
+              <label
+                htmlFor="emailAddress"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Email Address")}
+              </label>
+              <div className="mt-2">
+                <input
+                  id="emailAddress"
+                  name="emailAddress"
+                  type="email"
+                  onChange={inputHandler}
+                  value={formData.emailAddress}
+                  autoComplete="email"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
+              <label
+                htmlFor="Cell"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Mobile phone")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="cell"
+                  id="cell"
+                  value={formData.cell}
+                  onChange={inputHandler}
+                  autoComplete="address-level2"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="">
+                  <label
+                    htmlFor="document"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    {t("document")}
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="document"
+                      name="documento"
+                      value={formData.document}
+                      onChange={inputHandler}
+                      autoComplete="document"
+                      className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
+                    >
+                      <option value={"Single"}>{t("Passaporto")}</option>
+                      <option value={"Married"}>{t("Carta d'identità")}</option>
+                    </select>
+                  </div>
+                </div>
+              <div className="">
+                <label
+                htmlFor="Numero Documento"
+                className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                {t("Numero Documento")}
+                </label>
+                <div className="mt-2">
+                <input
+                  id="Numero Documento"
+                  name="Numero Documento"
+                  type="text"
+                  onChange={inputHandler}
+                  value={formData.emailAddress}
+                  autoComplete="Numero Documento"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div className="">
+                <label
+                htmlFor="Permesso di soggiorno"
+                className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                {t("Permesso di soggiorno")}
+                </label>
+                <div className="mt-2">
+                <input
+                  type="text"
+                  name="Permesso di soggiorno"
+                  id="bornIn"
+                  value={formData.bornIn}
+                  onChange={inputHandler}
+                  autoComplete="family-name"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+              
+            </div>
+              </div>
+            
+
+            
             </div>
             <div className="mt-6 flex-grow lg:ml-6 lg:mt-0 lg:flex-shrink-0 lg:flex-grow-0">
               <p
@@ -379,102 +502,7 @@ export default function People() {
         </div>
         <div className="px-4 sm:px-6 border-b pb-12">
           <div className=" grid grid-cols-3 gap-4	">
-            <div className="">
-              <label
-                htmlFor="emailAddress"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Email Address")}
-              </label>
-              <div className="mt-2">
-                <input
-                  id="emailAddress"
-                  name="emailAddress"
-                  type="email"
-                  onChange={inputHandler}
-                  value={formData.emailAddress}
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="">
-              <label
-                htmlFor="child"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Child")}
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="child"
-                  id="child"
-                  value={formData.child}
-                  onChange={inputHandler}
-                  autoComplete="family-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="">
-              <label
-                htmlFor="bornIn"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Born in")}
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="bornIn"
-                  id="bornIn"
-                  value={formData.bornIn}
-                  onChange={inputHandler}
-                  autoComplete="family-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
-              <label
-                htmlFor="pec"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Pec")}
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="pec"
-                  id="pec"
-                  value={formData.pec}
-                  onChange={inputHandler}
-                  autoComplete="address-level2"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
-              <label
-                htmlFor="Cell"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Mobile phone")}
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="cell"
-                  id="cell"
-                  value={formData.cell}
-                  onChange={inputHandler}
-                  autoComplete="address-level2"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+          
 
             {/* <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
               <label
@@ -502,7 +530,7 @@ export default function People() {
             {t("Address Information")}
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Use a permanent address where you can receive mail.
+            Informazioni sul domicilio
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -585,26 +613,27 @@ export default function People() {
               </div>
             </div>
           </div>
+          <div>
+                <label
+                  htmlFor="about"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  {t("About")}
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    id="about"
+                    name="about"
+                    onChange={inputHandler}
+                    rows={3}
+                    className="mt-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
+                    defaultValue={""}
+                  />
+                </div>
+              </div>
         </div>
         <div className="mt-12 px-4 sm:px-6">
           <div className="flex justify-between">
-            <div>
-              <h2 className="text-base font-semibold leading-7 text-gray-900">
-                {t("Children Information")}
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-gray-600">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={addFieldSet}
-                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Add
-              </button>
-            </div>
           </div>
           <div>
             {fieldSets.map(({ id }) => (
@@ -732,16 +761,16 @@ export default function People() {
                 </div>
                 <div className="edetails">
                   <p>
-                    <b>Mobile No : </b>
+                    <b>Numero di cellulare : </b>
                     {formData.cell}
                   </p>
                   <p>
-                    <b>DOB : </b>
+                    <b>Data di nascita : </b>
                     {formData.bornOn}
                   </p>
                   <div class="Address">
-                    <b>Address : </b>
-                    {formData.streetAddress}
+                    <b>indirizzo : </b>
+                    {formData.streetAddress}{" "}
                     {formData.city}{" "}
                   </div>
                 </div>
