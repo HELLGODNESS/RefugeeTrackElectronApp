@@ -15,8 +15,10 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 const personRouter = require('./routes/person');
+const serviceRouter = require('./routes/service');
 const imageRouter = require('./routes/images');
 app.use('/person', personRouter);
+app.use('/service', serviceRouter);
 app.use("/file", imageRouter);
 app.use('/healthCheck',(req,res)=>{
     res.send("Health 100%")

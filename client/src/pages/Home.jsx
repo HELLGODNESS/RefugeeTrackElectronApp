@@ -1,52 +1,43 @@
+import { ScaleIcon } from '@heroicons/react/20/solid'
 import React from 'react'
 
 export default function Home() {
 
+  const cards = [
+    { name: 'CAFETERIA', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'TAKEAWAY PACKAGE', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'SHOWERS', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'COVERS', href: '#', icon: ScaleIcon, amount: '0' },
+    { name: 'MEDICINES', href: '#', icon: ScaleIcon, amount: '0' },
+    // More items...
+  ]
     return (
-        
-  <div class="flex flex-wrap justify-center gap-7 pt-20">
-  
-  <div class="max-w-xs rounded overflow-hidden shadow-md bg-gray-100">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Cafeteria</div>
-      <span class="text-3xl font-bold tracking-tight text-gray-900">0</span>
-    </div>
-  </div>
 
-  
-  <div class="max-w-xs rounded overflow-hidden shadow-md bg-gray-100">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Takeaway Package</div>
-      <span class="text-3xl font-bold tracking-tight text-gray-900">0</span>
-    </div>
-  </div>
-
-  
-  <div class="max-w-xs rounded overflow-hidden shadow-md bg-gray-100">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Showers</div>
-      <span class="text-3xl font-bold tracking-tight text-gray-900">0</span>
-    </div>
-  </div>
-
-  
-  <div class="max-w-xs rounded overflow-hidden shadow-md bg-gray-100">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Covers</div>
-      <span class="text-3xl font-bold tracking-tight text-gray-900">0</span>
-    </div>
-  </div>
-
-  <div class="max-w-xs rounded overflow-hidden shadow-md bg-gray-100">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Medicines</div>
-      <span class="text-3xl font-bold tracking-tight text-gray-900">0</span>
-    </div>
-  </div>
-</div> 
- 
-
-
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-8">
+        <h2 className="text-lg font-medium leading-6 text-gray-900">Overview</h2>
+        <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Card */}
+          {cards.map((card) => (
+            <div key={card.name} className="overflow-hidden rounded-lg bg-white shadow">
+              <div className="p-5">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                  </div>
+                  <div className="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt className="truncate text-sm font-medium text-gray-500">{card.name}</dt>
+                      <dd>
+                        <div className="text-lg font-medium text-gray-900">{card.amount}</div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     )
 };
 

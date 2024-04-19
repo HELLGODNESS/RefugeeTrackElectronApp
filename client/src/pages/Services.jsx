@@ -6,6 +6,7 @@ import Dialog from "../components/Dialog";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
 import AutoComplete from "../components/AutoComplete";
+import axios from "axios";
 
 function Services() {
   const { t, i18n } = useTranslation();
@@ -13,14 +14,15 @@ function Services() {
   const [session, setSession] = useState("Cafeteria");
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
-  const usersReducer = {}
-  const tableBodyList = usersReducer?.data?.results || [];
-  const count = usersReducer?.data?.count || 0;
-  const loading = usersReducer?.loading || 0;
+  const [addPerson, setAddPerson] = useState()
+
+  const [tableBodyList, setTableBodyList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
 
   const [state, setState] = useState({
-    tableBodyList: [],
+    tableBodyList: tableBodyList,
     dialogInfo: {
       isOpened: false,
       text: "",
@@ -35,19 +37,21 @@ function Services() {
 
 
   const [tableHeaders, setTableHeaders] = useState([
-    { id: "_id", label: "ID" },
-    { id: "Name", label: "Name" },
-    { id: "Role", label: "Role" },
-    { id: "Email", label: "Email" },
-    { id: "Phone", label: "Phone" },
+    { id: "id", label: "ID" },
+    { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
+    { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
+    { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
+    { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
+    { id: "emailAddress", label: "Email", component: (data) => <>{data.emailAddress || ''} </> },
+    { id: "cell", label: "Phone", component: (data) => <>{data.cell || ''}</> },
     {
       id: "Image",
       label: "Image",
       component: (data, setData) => (
         <img
-          className="w-16 h-auto rounded-full"
-          src={`${process.env.REACT_APP_ATLAS_URL}/file/${data.Image && data?.Image
-            }`}
+          className="w-16 h-16 rounded-full"
+          // src={data.Image}
+          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'} 
           alt="profile"
         />
       ),
@@ -73,6 +77,23 @@ function Services() {
   ]);
 
 
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("http://localhost:4000/service", {
+        params: { page, limit, date: new Date().toDateString(), service: session },
+      }) // Pass searchQuery to API call
+      .then((res) => {
+        setTableBodyList(res.data.list);
+        setCount(res.data.count);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [limit, page, addPerson, session]);
+
   return (
 
     <div className="mt-10">
@@ -89,14 +110,15 @@ function Services() {
               autoComplete="Marital status"
               className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
             >
-              <option value={"Cafeteria"}>{t("Cafeteria")}</option>
-              <option value={"Takeaway package"}>{t("Takeaway package")}</option>
-              <option value={"Showers"}>{t("Showers")}</option>
-              <option value={"Covers"}>{t("Covers")}</option>
-              <option value={"Medicines"}>{t("Medicines")}</option>
+
+              <option value={"CAFETERIA"}>{t("Cafeteria")}</option>
+              <option value={"TAKEAWAY_PACKAGE"}>{t("Takeaway package")}</option>
+              <option value={"SHOWERS"}>{t("Showers")}</option>
+              <option value={"COVERS"}>{t("Covers")}</option>
+              <option value={"MEDICINES"}>{t("Medicines")}</option>
             </select>
 
-            <button type="button" class="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white whitespace-nowrap shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Start Session</button>
+            {/* <button type="button" class="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white whitespace-nowrap shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Start Session</button> */}
           </div>
 
         }}
@@ -112,7 +134,7 @@ function Services() {
         onTrue={(e) => deleteFromTable(e)}
         dialogInfo={state.dialogInfo}
       />
-      <AutoComplete />
+      <AutoComplete activeSession={session} setAddPerson={setAddPerson} />
       <DataTable
         isLoading={loading}
         tableHeadersData={tableHeaders}

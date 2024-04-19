@@ -33,7 +33,7 @@ module.exports = {
         try {
             const { body, files } = req
             const image = files && files.length && files[0].filename
-            console.log(body, 'body')
+            console.log(body, 'body', image)
             const person = await client.person.create({
                 data: {
                     ...body,

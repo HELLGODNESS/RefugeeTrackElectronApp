@@ -12,7 +12,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function AutoComplete() {
+export default function AutoComplete({ activeSession, setAddPerson }) {
     const [query, setQuery] = useState('')
     const [people, setPeople] = useState([])
 
@@ -33,10 +33,24 @@ export default function AutoComplete() {
 
     }, [debounceSearch])
 
-    console.log(addService, 'addService')
+    const handleService = (person) => {
+        axios.post("http://localhost:4000/service", {
+            personId: person.id,
+            date: new Date().toDateString(),
+            service: activeSession
+        })
+            .then((res) => {
+                console.log(res.data, 'res')
+                setAddPerson(res.data)
+                setQuery("")
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
+
     return (<div className="mx-4 px-4">
 
-        <Combobox onChange={(person) => setService(prevState => ([...prevState, person]))}>
+        <Combobox onChange={(person) => handleService(person)}>
             {({ activeOption }) => (
                 <>
                     <div className="relative rounded-lg ">
