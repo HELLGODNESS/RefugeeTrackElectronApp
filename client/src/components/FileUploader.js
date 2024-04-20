@@ -36,7 +36,7 @@ const FileUploader = ({ file, setFile }) => {
 
 
     return (
-        <div className='flex justify-center rounded-full border border-dashed border-gray-900/25 w-72 h-72 text-center'>
+        <div className='flex justify-center rounded-full border border-dashed border-gray-900/25 w-72 h-72 text-center bg-white'>
             <form className="self-center" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} onSubmit={(e) => e.preventDefault()}>
                 <div className=' text-sm leading-6 text-gray-600'>
                     <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />

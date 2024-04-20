@@ -4,6 +4,6 @@ const personController = require('../controllers/service');
 router.get('/', personController.getAllServices);
 router.get('/count', personController.getServicesCount);
 router.post('/', personController.giveService);
-// Add other routes as needed
+router.delete('/', personController.deleteService);
 
 module.exports = router;

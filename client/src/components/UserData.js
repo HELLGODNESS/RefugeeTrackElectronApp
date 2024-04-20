@@ -32,6 +32,7 @@ function UserData(props) {
     religion,
     child,
     zip,
+    Family
   } = props;
   console.log(props, "props");
   const identityCardRef = useRef(null);
@@ -201,15 +202,42 @@ function UserData(props) {
 
         {activeTab === "Children" && (
           <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
-            <dl className="grid grid-cols-1 gap-x-9 gap-y-8 sm:grid-cols-2">
+            <dl className="grid grid-cols-1 gap-x-9 gap-y-8 sm:grid-cols-2 mb-4">
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> {t("Child")} </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {child && <p>{child}</p>}
-                </dd>
+                <dt className="text-sm font-medium text-gray-500"> {t("Child")}: {child || 0} </dt>
               </div>
             </dl>
+            {Family && Family.length && Family.map((fam, index) => (<>
+              <dl className="grid grid-cols-1 gap-x-9 gap-y-8 sm:grid-cols-4 ">
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500"> {t("First Name")}</dt>
+                  <dd className="mt-1 text-sm text-gray-900">
+                    {fam.firstName && <p>{fam.firstName}</p>}
+                  </dd>
+                </div>
+
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500"> {t("Last Name")}</dt>
+                  <dd className="mt-1 text-sm text-gray-900">
+                    {fam.lastName && <p>{fam.lastName}</p>}
+                  </dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500"> {t("Last Name")}</dt>
+                  <dd className="mt-1 text-sm text-gray-900">
+                    {fam.relation && <p>{fam.relation}</p>}
+                  </dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500"> {t("Last Name")}</dt>
+                  <dd className="mt-1 text-sm text-gray-900">
+                    {fam.age && <p>{fam.age}</p>}
+                  </dd>
+                </div>
+              </dl>
+            </>))}
           </div>
+
         )}
 
       </article>

@@ -20,10 +20,29 @@ module.exports = {
                 where,
                 skip: +page < 1 ? 0 : +page * limit,
                 take: +limit,
+                include: {
+                    Family: true
+                }
             });
             const count = await client.person.count({ where });
-
             res.json({ list: persons, count });
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: error.message });
+        }
+    },
+    async getPersonByID(req, res) {
+        try {
+            const { id } = req.query;
+            const persons = await client.person.findFirst({
+                where: {
+                    id: +id
+                },
+                include: {
+                    Family: true
+                }
+            });
+            res.json({ persons });
         } catch (error) {
             console.log(error)
             res.status(500).json({ message: error.message });
@@ -33,14 +52,21 @@ module.exports = {
         try {
             const { body, files } = req
             const image = files && files.length && files[0].filename
-            console.log(body, 'body', image)
+            const { bornOn, family, ...rest } = body
+            const familyArray = family ? JSON.parse(family) : []
             const person = await client.person.create({
                 data: {
-                    ...body,
+                    ...rest,
                     ...(image && { image }),
-                    ...(body.bornOn && {
-                        bornOn: new Date(body.bornOn).toISOString()
+                    ...(bornOn && {
+                        bornOn: new Date(bornOn).toISOString()
+                    }),
+                    ...(familyArray.length && {
+                        Family: {
+                            create: familyArray
+                        }
                     })
+
                 }
             })
             res.status(201).json(person);

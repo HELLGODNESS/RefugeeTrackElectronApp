@@ -7,6 +7,7 @@ module.exports = {
         try {
             const { page = 0, limit = 20, search, date, service } = req.query;
             const where = {
+                deletedAt: null,
                 date: date,
                 service: service.toUpperCase(),
                 ...(search && {
@@ -45,12 +46,14 @@ module.exports = {
             const cafeteria = await client.service.count({
                 where: {
                     date: date,
+                    deletedAt: null,
                     service: 'CAFETERIA'
                 }
             });
             const takeawayPackage = await client.service.count({
                 where: {
                     date: date,
+                    deletedAt: null,
                     service: 'TAKEAWAY_PACKAGE'
                 }
             });
@@ -58,6 +61,7 @@ module.exports = {
             const showers = await client.service.count({
                 where: {
                     date: date,
+                    deletedAt: null,
                     service: 'SHOWERS'
                 }
             })
@@ -65,6 +69,7 @@ module.exports = {
             const covers = await client.service.count({
                 where: {
                     date: date,
+                    deletedAt: null,
                     service: 'COVERS'
                 }
             })
@@ -72,6 +77,7 @@ module.exports = {
             const medicines = await client.service.count({
                 where: {
                     date: date,
+                    deletedAt: null,
                     service: 'MEDICINES'
                 }
             })
@@ -103,6 +109,23 @@ module.exports = {
             console.log(error)
             res.status(400).json({ message: error.message });
         }
+    },
+
+    async deleteService(req, res) {
+        try {
+            const { id } = req.query;
+            const serviceDeleted = await client.service.update({
+                where: {
+                    id: +id
+                },
+                data: {
+                    deletedAt: new Date()
+                }
+            })
+            res.status(201).json(serviceDeleted);
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({ message: error.message });
+        }
     }
-    // Add other controller methods as needed
 };

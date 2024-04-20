@@ -25,6 +25,7 @@ model Person {
   bornIn        String?
   cell          String?
   child         String?
+  religion         String?
 
   pec           String?
   city          String?
@@ -35,9 +36,31 @@ model Person {
   streetAddress String?
   about         String?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  Service       Service[]
+
+  document        String?
+  documentNumber  String?
+  residencyPermit String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  Service   Service[]
+  Family    Family[]
+}
+
+model Family {
+  id        Int     @id @default(autoincrement())
+  firstName String?
+  lastName  String?
+  gender    String?
+  relation    String?
+  age       String?
+  person    Person? @relation(fields: [personId], references: [id])
+  personId  Int?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model Service {
@@ -45,12 +68,12 @@ model Service {
   person   Person? @relation(fields: [personId], references: [id])
   personId Int?
 
-  service   String?
-  date      String?
- 
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  service String?
+  date    String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model User {
@@ -58,4 +81,3 @@ model User {
   email String @unique
   name  String
 }
-

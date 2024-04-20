@@ -3,10 +3,10 @@ import DataTable from "../components/DataTable";
 import Paginator from "../components/paginator";
 import SectionHeader from "../components/SectionHeader";
 import Dialog from "../components/Dialog";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "react-i18next";
 import AutoComplete from "../components/AutoComplete";
 import axios from "axios";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 
 function Services() {
@@ -20,7 +20,7 @@ function Services() {
   const [tableBodyList, setTableBodyList] = useState([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  
+
 
 
   const [state, setState] = useState({
@@ -32,12 +32,6 @@ function Services() {
     },
   });
 
-
-  function deleteFromTable(data) {
-    // dispatch(deleteUser(data._id));
-  }
-
-
   const [tableHeaders, setTableHeaders] = useState([
     { id: "id", label: t("ID") },
     { id: "Name", label: t("Name"), component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
@@ -46,7 +40,7 @@ function Services() {
     { id: "city", label: t("City"), component: (data) => <>{data.city || ''} </> },
     { id: "emailAddress", label: t("Email"), component: (data) => <>{data.emailAddress || ''} </> },
     { id: "cell", label: t("Mobile phone"), component: (data) => <>{data.cell || ''}</> },
-  
+
     {
       id: "Image",
       label: t("Photo"),
@@ -54,7 +48,7 @@ function Services() {
         <img
           className="w-16 h-16 rounded-full"
           // src={data.Image}
-          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'} 
+          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'}
           alt="profile"
         />
       ),
@@ -69,10 +63,7 @@ function Services() {
             title="Delete"
             onClick={(e) => deleteFromTable(data)}
           >
-            <i
-              className="fas fa-times text-[color:var(--primary-color)]"
-              aria-hidden="true"
-            ></i>
+            <TrashIcon className="w-5 h-5" />
           </button>
         </div>
       ),
@@ -96,6 +87,23 @@ function Services() {
         setLoading(false);
       });
   }, [limit, page, addPerson, session]);
+
+
+
+  function deleteFromTable(data) {
+    axios
+      .delete("http://localhost:4000/service", {
+        params: { id: data.id },
+      })
+      .then((res) => {
+        setPage(0)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
 
   return (
 

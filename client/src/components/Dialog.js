@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Dialog(props) {
- 
+
     return (props.dialogInfo.isOpened &&
         <React.Fragment>
             {props.dialogInfo.type === "Error" &&
