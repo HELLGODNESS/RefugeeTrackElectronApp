@@ -31,7 +31,7 @@ module.exports = {
             });
             const count = await client.service.count({ where });
 
-            res.json({ list: services.map(x => ({ ...x, ...x.person })), count });
+            res.json({ list: services.map(x => ({ ...x.person, ...x })), count });
         } catch (error) {
             console.log(error)
             res.status(500).json({ message: error.message });

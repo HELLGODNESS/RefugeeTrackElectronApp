@@ -70,8 +70,7 @@ function Services() {
     },
   ]);
 
-
-  useEffect(() => {
+  const getServices = () => {
     setLoading(true);
     axios
       .get("http://localhost:4000/service", {
@@ -86,6 +85,9 @@ function Services() {
         console.log(err);
         setLoading(false);
       });
+  }
+  useEffect(() => {
+    getServices()
   }, [limit, page, addPerson, session]);
 
 
@@ -96,7 +98,8 @@ function Services() {
         params: { id: data.id },
       })
       .then((res) => {
-        setPage(0)
+        getServices()
+
       })
       .catch((err) => {
         console.log(err);
