@@ -1,12 +1,14 @@
 import html2canvas from "html2canvas";
+import { t } from "i18next";
 import React, { useRef, useState } from "react";
+import {useTranslation} from "react-i18next";
 
 
 
 const tabs = [
-  { name: "Profile", href: "#", current: true },
-  { name: "Address", href: "#", current: true },
-  { name: "Children", href: "#", current: true },
+  { name: "Profile", href: "#", current: false },
+  { name: "Address", href: "#", current: false },
+  { name: "Children", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -35,6 +37,7 @@ function UserData(props) {
   const identityCardRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState("Profile");
+  const {t} = useTranslation();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -93,7 +96,7 @@ function UserData(props) {
                     )}
                     aria-current={tab.current ? "page" : undefined}
                   >
-                    {tab.name}
+                    {t(tab.name)}
                   </a>
                 ))}
               </nav>
@@ -107,7 +110,7 @@ function UserData(props) {
               <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-gray-500">
                   {" "}
-                  Marital Status
+                  {t("Marital status")}
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {" "}
@@ -115,26 +118,26 @@ function UserData(props) {
                 </dd>
               </div>
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Gender</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Gender")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {" "}
                   {gender && <p>{gender}</p>}
                 </dd>
               </div>
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> BornIn</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Born in")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {bornIn && <p>{bornIn}</p>}
                 </dd>
               </div>
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Born On</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Born on")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {bornOn && <p>{bornOn}</p>}
                 </dd>
               </div>
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Phone</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Mobile phone")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {cell && <p>{cell}</p>}
                 </dd>
@@ -153,14 +156,14 @@ function UserData(props) {
               </div>
 
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Religion</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Religion")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {religion && <p>{religion}</p>}
                 </dd>
               </div>
 
               <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">About</dt>
+                <dt className="text-sm font-medium text-gray-500">{t("About")}</dt>
                 <dd className="mt-1 max-w-prose space-y-5 text-sm text-gray-900" />
               </div>
             </dl>
@@ -171,14 +174,14 @@ function UserData(props) {
           <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
             <dl className="grid grid-cols-1 gap-x-9 gap-y-8 sm:grid-cols-2">
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> City </dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("City")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {city && <p>{city}</p>}
                 </dd>
               </div>
 
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Street</dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Street")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {streetAddress && <p>{streetAddress}</p>}
                 </dd>
@@ -186,7 +189,7 @@ function UserData(props) {
               <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-gray-500">
                   {" "}
-                  Postal Code/ Zip
+                  {t("Postal Code/ Zip")}
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {zip && <p>{zip}</p>}
@@ -200,7 +203,7 @@ function UserData(props) {
           <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
             <dl className="grid grid-cols-1 gap-x-9 gap-y-8 sm:grid-cols-2">
               <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Child </dt>
+                <dt className="text-sm font-medium text-gray-500"> {t("Child")} </dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {child && <p>{child}</p>}
                 </dd>

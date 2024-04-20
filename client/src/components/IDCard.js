@@ -1,11 +1,13 @@
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 function IDCard(props) {
   const { firstName, lastName, cell, bornOn, streetAddress, city, image } =
     props;
   console.log(props, "props");
   const identityCardRef = useRef(null);
+  const {t} = useTranslation();
 
   return (
     <React.Fragment>
@@ -13,8 +15,8 @@ function IDCard(props) {
         <div>
           <div className="font ">
             <div className="companyname ">
-              Card <br />
-              <span class="tab">Management</span>
+              {t("Card")}<br />
+              <span class="tab">{t("Management")}</span>
             </div>
             <div className="top">
               {image && (
@@ -38,19 +40,19 @@ function IDCard(props) {
               <div className="edetails">
                 {cell && (
                   <p>
-                    <b>Numero di telefono : </b>
+                    <b>{t("Mobile phone")}: </b>
                     {cell}
                   </p>
                 )}
                 {bornOn && (
                   <p>
-                    <b>DOB : </b>
+                    <b>{t("Born on")}: </b>
                     {bornOn}
                   </p>
                 )}
                 {(streetAddress || city) && (
                   <div class="Address">
-                    <b>Address : </b>
+                    <b>{t("Address")}: </b>
                     {streetAddress || ""}
                     {city || ""}{" "}
                   </div>

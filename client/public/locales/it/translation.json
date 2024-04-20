@@ -62,7 +62,16 @@
   "Add new record or search with different criteria.": "Aggiungi un nuovo record o cerca con criteri diversi.",
   "Previous" : "Precedente",
   "Next" : "Successivo",
-  "Rows per page:" : "Righe per pagina:"
+  "Rows per page:" : "Righe per pagina:",
+  "Religion" : "Religione",
+  "Postal Code/ Zip" : "Codice Postale / ZIP",
+  "Profile" : "Profilo",
+  "Address" : "Indirizzo",
+  "Children" : "Figli",
+  "User Data" : "Dati Utente",
+  "Card" : "GESTIONE",
+  "Management" : "SCHEDA"
+  
   
 
 }

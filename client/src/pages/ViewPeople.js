@@ -215,7 +215,7 @@ export default function ViewPeople() {
         <div className="bg-white text-left text-black w-[250px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
             <h4 className="text-base text-gray-900 font-semibold">
-              Identity Card
+              {t("Identity Card")}
             </h4>
             <XMarkIcon
               onClick={() => setCardModalOpen(false)}
@@ -241,7 +241,7 @@ export default function ViewPeople() {
       <Modal isModalOpen={!!peopleData} setModalOpen={setPeopleData}>
         <div className="bg-white text-left text-black w-[600px] md:w-[700px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
-            <h4 className="text-base text-gray-900 font-semibold">User Data</h4>
+            <h4 className="text-base text-gray-900 font-semibold">{t("User Data")}</h4>
             <XMarkIcon
               onClick={() => setPeopleData(false)}
               className="w-5 h-5 text-gray-600 cursor-pointer"
