@@ -1,24 +1,24 @@
 import { NavLink } from "react-router-dom";
-import { UserPlusIcon, RocketLaunchIcon, IdentificationIcon, HomeIcon, DocumentIcon, UsersIcon, }
- from "@heroicons/react/24/solid";
- import { useTranslation } from "react-i18next";
- 
-
-
+import {
+  UserPlusIcon,
+  RocketLaunchIcon,
+  IdentificationIcon,
+  HomeIcon,
+  DocumentIcon,
+  UsersIcon,
+} from "@heroicons/react/24/solid";
+import { useTranslation } from "react-i18next";
 
 import { useState } from "react";
 
 const NavLinks = (props) => {
-
   const { t, i18n } = useTranslation();
-  const [selectedLink, setSelectedLink] = useState()
+  const [selectedLink, setSelectedLink] = useState();
   const lis = [
-
-
     {
-      title: "Home",
+      title: t("Home"),
       linkTo: "Home",
-      icon: <HomeIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      icon: <HomeIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />,
       // icon: <i className="fas fa-home"></i>,
       // icon: (
       //   <img src={} alt="" className="w-6 invert"></img>
@@ -26,25 +26,32 @@ const NavLinks = (props) => {
     },
 
     {
-      title: t("People") ,
+      title: t("People"),
       linkTo: "addPeople",
-      icon: <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      icon: (
+        <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      ),
     },
     // {
     //   title: "Guest Dinner/Weave",
     //   linkTo:"",
     //   icon: <i className="fas fa-smile text-lg"></i>
     // },
-   
+
     // {
     //   title: "Breakfast",
     //   linkTo:"",
     //   icon:<i className="fas fa-bread-slice	text-lg"></i>
     // },
     {
-      title: "Servizi",
-      linkTo:"services",
-      icon:<RocketLaunchIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      title: t("Services"),
+      linkTo: "services",
+      icon: (
+        <RocketLaunchIcon
+          className="h-7 w-7 text-gray-300"
+          aria-hidden="true"
+        />
+      ),
     },
     // {
     //   title: "Dinner",
@@ -58,14 +65,16 @@ const NavLinks = (props) => {
     //   icon: <i className="fas fa-shower text-lg"></i>,
     // },
     {
-      title: "Report",
-      linkTo:"",
-      icon: <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      title: t("Report"),
+      linkTo: "",
+      icon: (
+        <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      ),
     },
     {
-      title: "Utenti",
+      title: t("Users"),
       linkTo: "viewPeople",
-      icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
+      icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />,
     },
     // {
     //   title: "View all Properties",
@@ -151,14 +160,11 @@ const NavLinks = (props) => {
             to={content.linkTo}
             className={`group flex gap-x-3 p-2 text-sm leading-6 font-semibold 
              items-center w-[230px]                 
-                   py-[10px] cursor-pointer  text-white ${selectedLink === index && 'bg-[#060311]'} 
+                   py-[10px] cursor-pointer  text-white ${selectedLink === index && "bg-[#060311]"} 
                   hover:border-l-[color:var(--red-color)] hover:text-[#e9c26d]  hover:bg-[#070707] hover:pl-[0.88rem]`}
           >
-            <span className="ml-3 mr-3">
-            {content.icon}
-
-            </span>
-            <div className="cursor-pointer">{content.title}</div>
+            <span className="ml-3 mr-3">{content.icon}</span>
+            <div className="cursor-pointer">{t(content.title)}</div>
           </NavLink>
         </li>
       ))}

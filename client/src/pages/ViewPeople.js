@@ -16,11 +16,9 @@ import {
 import Modal from "../components/Modal";
 import IDCard from "../components/IDCard";
 import UserData from "../components/UserData";
-
+import { useTranslation } from "react-i18next";
 
 export default function ViewPeople() {
-
-
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
   const identityCardRef = useRef(null);
@@ -30,6 +28,7 @@ export default function ViewPeople() {
   const [cardModalOpen, setCardModalOpen] = useState(false);
   const [peopleData, setPeopleData] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { t, i18n } = useTranslation();
 
   const [state, setState] = useState({
     tableBodyList: tableBodyList,
@@ -50,25 +49,55 @@ export default function ViewPeople() {
 
   const [tableHeaders, setTableHeaders] = useState([
     { id: "id", label: "ID" },
-    { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
+    {
+      id: "Name",
+      label: t("Name"),
+      component: (data) => (
+        <>
+          {data.firstName || ""} {data.lastName || ""}
+        </>
+      ),
+    },
     // { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
-    { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
+    {
+      id: "gender",
+      label: t("Gender"),
+      component: (data) => <>{data.gender || ""} </>,
+    },
     // { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
-    { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
-    { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
+    {
+      id: "bornIn",
+      label: t("Born in"),
+      component: (data) => <>{data.bornIn || ""} </>,
+    },
+    {
+      id: "city",
+      label: t("City"),
+      component: (data) => <>{data.city || ""} </>,
+    },
     // { id: "streetAddress", label: "Address", component: (data) => <>{data.streetAddress || ''} </> },
     // { id: "pec", label: "Pec", component: (data) => <>{data.pec || ''} </> },
     // { id: "bornOn", label: "Born On", component: (data) => <>{data.bornOn || ''} </> },
-    { id: "emailAddress", label: "Email", component: (data) => <>{data.emailAddress || ''} </> },
-    { id: "cell", label: "Phone", component: (data) => <>{data.cell || ''}</> },
+    {
+      id: "emailAddress",
+      label: "Email",
+      component: (data) => <>{data.emailAddress || ""} </>,
+    },
+    {
+      id: "cell",
+      label: t("Mobile phone"),
+      component: (data) => <>{data.cell || ""}</>,
+    },
     {
       id: "Image",
-      label: "Image",
+      label: t("Photo"),
       component: (data, setData) => (
         <img
           className="w-16 h-16 rounded-full"
           // src={data.Image}
-          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'} 
+          src={
+            data.image ? `http://localhost:4000/file/${data.image}` : "user.png"
+          }
           alt="profile"
         />
       ),
@@ -158,7 +187,7 @@ export default function ViewPeople() {
   return (
     <div className="mt-10">
       <SectionHeader
-        title={"All People"}
+        title={t("All People")}
         mainPage={"People"}
         mainPageLink={"/viewPeople"}
         breadCrumbs={[{ subPage: "View All People", link: "/viewPeople" }]}
@@ -166,7 +195,7 @@ export default function ViewPeople() {
 
       <input
         type="text"
-        placeholder="Search by name..."
+        placeholder={t("Search by name...")}
         value={searchQuery}
         onChange={handleSearchInputChange}
         className="border border-gray-300 rounded-md px-3 py-1 w-full max-w-[15rem] mb-4 ml-10" // Add left padding to accommodate the icon
@@ -198,9 +227,11 @@ export default function ViewPeople() {
             className="rounded px-3 py-1  items-center "
           >
             <IDCard {...cardModalOpen} />
-
           </div>
-          <button className="ml-4 inline-flex gap-2 w-[88%] rounded-md bg-indigo-600  items-center text-center justify-center my-4 text-sm font-semibold py-1 text-white z-100" onClick={handlePrint}>
+          <button
+            className="ml-4 inline-flex gap-2 w-[88%] rounded-md bg-indigo-600  items-center text-center justify-center my-4 text-sm font-semibold py-1 text-white z-100"
+            onClick={handlePrint}
+          >
             Print
             <PrinterIcon className="w-5 h-5" />
           </button>

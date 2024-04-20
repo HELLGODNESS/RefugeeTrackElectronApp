@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import AutoComplete from "../components/AutoComplete";
 import axios from "axios";
 
+
 function Services() {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState();
@@ -19,6 +20,7 @@ function Services() {
   const [tableBodyList, setTableBodyList] = useState([]);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  
 
 
   const [state, setState] = useState({
@@ -37,16 +39,17 @@ function Services() {
 
 
   const [tableHeaders, setTableHeaders] = useState([
-    { id: "id", label: "ID" },
-    { id: "Name", label: "Name", component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
-    { id: "gender", label: "Gender", component: (data) => <>{data.gender || ''} </> },
-    { id: "bornIn", label: "Born In", component: (data) => <>{data.bornIn || ''} </> },
-    { id: "city", label: "City", component: (data) => <>{data.city || ''} </> },
-    { id: "emailAddress", label: "Email", component: (data) => <>{data.emailAddress || ''} </> },
-    { id: "cell", label: "Phone", component: (data) => <>{data.cell || ''}</> },
+    { id: "id", label: t("ID") },
+    { id: "Name", label: t("Name"), component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
+    { id: "gender", label: t("Gender"), component: (data) => <>{data.gender || ''} </> },
+    { id: "bornIn", label: t("Born in"), component: (data) => <>{data.bornIn || ''} </> },
+    { id: "city", label: t("City"), component: (data) => <>{data.city || ''} </> },
+    { id: "emailAddress", label: t("Email"), component: (data) => <>{data.emailAddress || ''} </> },
+    { id: "cell", label: t("Mobile phone"), component: (data) => <>{data.cell || ''}</> },
+  
     {
       id: "Image",
-      label: "Image",
+      label: t("Photo"),
       component: (data, setData) => (
         <img
           className="w-16 h-16 rounded-full"
@@ -97,7 +100,7 @@ function Services() {
   return (
 
     <div className="mt-10">
-      <SectionHeader title={"Services"}
+      <SectionHeader title={t("Services")}
         mainPage={"Services"}
         mainPageLink={"/services"}
         tools={() => {
@@ -111,11 +114,11 @@ function Services() {
               className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
             >
 
-              <option value={"CAFETERIA"}>{t("MENSA")}</option>
-              <option value={"TAKEAWAY_PACKAGE"}>{t("PACCO D'ASPORTO")}</option>
-              <option value={"SHOWERS"}>{t("DOCCIE")}</option>
-              <option value={"COVERS"}>{t("COPERTE")}</option>
-              <option value={"MEDICINES"}>{t("MEDICINE")}</option>
+              <option value={"MENSA"}>{t("Cafeteria")}</option>
+              <option value={"PACCO D'ASPORTO"}>{t("Takeaway Package")}</option>
+              <option value={"DOCCIE"}>{t("Shower")}</option>
+              <option value={"COPERTE"}>{t("Covers")}</option>
+              <option value={"MEDICINES"}>{t("Medicines")}</option>
             </select>
 
             {/* <button type="button" class="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white whitespace-nowrap shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Start Session</button> */}

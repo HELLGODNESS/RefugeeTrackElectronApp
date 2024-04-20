@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import LanguageSelector from "../components/language";
 import { useTranslation } from "react-i18next";
 import FileUploader from "../components/FileUploader";
 import toast from "react-hot-toast";
@@ -143,15 +142,13 @@ export default function People() {
       <form className=" lg:col-span-9" action="#" method="POST">
         {/* Profile section */}
         <div className="px-4 py-6 sm:p-6 lg:pb-8">
-          <div className="flex justify-end">
-            <LanguageSelector />
-          </div>
+         
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             {t("User Detail")}{" "}
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
             {t(
-              "Metti tutti i dati dell'utente"
+              "Put All User Data"
             )}
           </p>
           <div className="mt-6 flex flex-col lg:flex-row">
@@ -212,10 +209,10 @@ export default function People() {
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
-                      <option value={"Single"}>{t("Celibe")}</option>
-                      <option value={"Married"}>{t("Sposato")}</option>
-                      <option value={"Widowed"}>{t("Vedovo/a")}</option>
-                      <option value={"Divorced"}>{t("Divorziato")}</option>
+                      <option value={"Single"}>{t("Celibate")}</option>
+                      <option value={"Married"}>{t("Married")}</option>
+                      <option value={"Widowed"}>{t("Widower")}</option>
+                      <option value={"Divorced"}>{t("Divorced")}</option>
                     </select>
                   </div>
                 </div>
@@ -365,7 +362,7 @@ export default function People() {
                     htmlFor="document"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    {t("document")}
+                    {t("Document")}
                   </label>
                   <div className="mt-2">
                     <select
@@ -376,8 +373,8 @@ export default function People() {
                       autoComplete="document"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
-                      <option value={"Single"}>{t("Passaporto")}</option>
-                      <option value={"Married"}>{t("Carta d'identità")}</option>
+                      <option value={"Single"}>{t("Passport")}</option>
+                      <option value={"Married"}>{t("Identity Card")}</option>
                     </select>
                   </div>
                 </div>
@@ -386,7 +383,7 @@ export default function People() {
                 htmlFor="Numero Documento"
                 className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                {t("Numero Documento")}
+                {t("Document Number")}
                 </label>
                 <div className="mt-2">
                 <input
@@ -404,7 +401,7 @@ export default function People() {
                 htmlFor="Permesso di soggiorno"
                 className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                {t("Permesso di soggiorno")}
+                {t("Residency Permit")}
                 </label>
                 <div className="mt-2">
                 <input
@@ -530,7 +527,7 @@ export default function People() {
             {t("Address Information")}
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Informazioni sul domicilio
+            {t("Domicile information")}
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

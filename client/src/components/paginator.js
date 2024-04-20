@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
+  const { t, i18n } = useTranslation();
   const [pageNumbers, setPageNumbers] = useState([
     ...Array(Math.ceil(total / limit)),
   ]);
@@ -22,14 +24,14 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           onClick={() => page !== 0 && setPage(page - 1)}
         >
-          Previous
+          {t("Previous")}
         </button>
         <button
           type="button"
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           onClick={() => page + 1 !== pageNumbers.length && setPage(page + 1)}
         >
-          Next
+          {t("Next")}
         </button>
       </div>
       {/* For large devices */}
@@ -50,7 +52,7 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
           >
             <div className="relative inline-flex items-center gap-2 mr-4">
               <span className="text-sm font-medium text-gray-500">
-                Rows per page:
+                {t("Rows per page:")}
               </span>
               <select
                 id="countries"
@@ -67,8 +69,6 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
                 <option value="175">175</option>
                 <option value="200">200</option>
               </select>
-
-
             </div>
             <button
               type="button"
@@ -77,7 +77,7 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
               } relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20`}
               onClick={() => page !== 0 && setPage(page - 1)}
             >
-              <span className="">Previous</span>
+              <span className="">{t("Previous")}</span>
             </button>
             {pageNumbers &&
               pageNumbers.map((currentPage, index) => {
@@ -87,8 +87,8 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
                     type="button"
                     className={`cursor-pointer relative z-10 inline-flex items-center border ${
                       index === page
-                      ? "border-blue-500 text-blue-600 bg-blue-50 !cursor-not-allowed"
-                      : "border-gray-300 text-gray-500 bg-white hover:bg-gray-50"
+                        ? "border-blue-500 text-blue-600 bg-blue-50 !cursor-not-allowed"
+                        : "border-gray-300 text-gray-500 bg-white hover:bg-gray-50"
                     } px-4 py-2 text-sm font-medium focus:z-20`}
                     onClick={() => page !== index && setPage(index)}
                   >
@@ -107,7 +107,7 @@ const Paginator = ({ limit = 30, setLimit, page = 0, setPage, total = 30 }) => {
                   : "cursor-not-allowed"
               } relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20`}
             >
-              <span className="">Next</span>
+              <span className="">{t("Next")}</span>
               {/* <ChevronRightIcon className="h-5 w-5" aria-hidden="true" /> */}
             </button>
           </nav>

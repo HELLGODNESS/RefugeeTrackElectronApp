@@ -1,6 +1,9 @@
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 const FileUploader = ({ file, setFile }) => {
+
+    const {t,i18n} = useTranslation();
 
 
     const changeHandler = (event) => {
@@ -41,7 +44,7 @@ const FileUploader = ({ file, setFile }) => {
                         className={`${dragActive ? "bg-blue-50" : "bg-white"}cursor-pointer rounded-md bg-white font-semibold text-[color:var(--primary-color)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--primary-color)] focus-within:ring-offset-2 hover:text-[color:var(--primary-color)]"`}>
                         <p class="flex flex-col items-center space-x-2">
 
-                            <span>Upload a file</span>
+                            <span>{t("Upload a File")}</span>
                             {dragActive && <div className="absolute width-full h-full" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} ></div>}
 
                         </p>
