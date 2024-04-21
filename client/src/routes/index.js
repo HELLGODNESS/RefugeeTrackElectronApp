@@ -16,9 +16,8 @@ export default function Router() {
           element: <AddPeople />,
         },
         {
-          path: "Home",
+          path: "",
           element: <Home />
-          // element: <Home />,
         },
         {
           path: "Services",

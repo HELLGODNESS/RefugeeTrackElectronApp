@@ -16,6 +16,7 @@ export default function People() {
   const identityCardRef = useRef(null);
 
   const [images, setImages] = useState();
+  const [docs, setDocs] = useState();
   const [oldImages, setOldImages] = useState();
 
   const [formData, setFormData] = useState({
@@ -63,16 +64,22 @@ export default function People() {
       Object.keys(formData).forEach((key) => {
         formState.append(key, formData[key]);
       });
-      if (fieldSets.length) {
-        formState.append("family", JSON.stringify(fieldSets));
-      }
+      // if (fieldSets.length) {
+      //   formState.append("family", JSON.stringify(fieldSets));
+      // }
       if (images) {
         formState.append("SelectedImages", images);
+      }
+      if (docs && docs.length) {
+        for (let i = 0; i < docs.length; i++) {
+          formState.append('Docs', docs[i]);
+        }
       }
       const response = await axios.post(
         "http://localhost:4000/person",
         formState
       );
+      setFormData({});
 
       // Extract the unique identifier (e.g., user ID) from the response
       const userId = response.data.id;
@@ -82,7 +89,6 @@ export default function People() {
       generateIdentityCard();
 
       // Reset form data after successful request processing
-      setFormData({});
       toast.success("Person Added successfully");
 
       // Calculate new barcode value after setting barcodeValue
@@ -91,6 +97,8 @@ export default function People() {
     } catch (error) {
       console.log(error);
       toast.error(JSON.stringify(error));
+      setFormData({});
+
     }
   };
 
@@ -408,6 +416,19 @@ export default function People() {
                     />
                   </div>
                 </div>
+
+                <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
+                  <label className="block text-sm font-medium leading-6 text-gray-900" for="file_input">Upload file</label>
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md border-0 py-[3px] shadow-sm ring-1 ring-inset bg-white ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" id="multiple_files"
+                      type="file"
+                      multiple
+                      onChange={(e) => setDocs(e.target.files)}
+                    />
+
+                  </div>
+                </div>
                 <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
                   <label
                     htmlFor="residencyPermit"
@@ -427,8 +448,6 @@ export default function People() {
                     />
                   </div>
                 </div>
-
-
               </div>
 
 
@@ -615,7 +634,7 @@ export default function People() {
             />
           </div>
         </div>
-        {fieldSets.length > 0 && <div className="mt-12 px-4 sm:px-6">
+        {false && <div className="mt-12 px-4 sm:px-6">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             {t("Family Information")}
           </h2>

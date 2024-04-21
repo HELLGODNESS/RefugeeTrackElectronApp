@@ -17,12 +17,8 @@ const NavLinks = (props) => {
   const lis = [
     {
       title: t("Home"),
-      linkTo: "Home",
+      linkTo: "",
       icon: <HomeIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />,
-      // icon: <i className="fas fa-home"></i>,
-      // icon: (
-      //   <img src={} alt="" className="w-6 invert"></img>
-      // ),
     },
 
     {
@@ -32,17 +28,6 @@ const NavLinks = (props) => {
         <UserPlusIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
       ),
     },
-    // {
-    //   title: "Guest Dinner/Weave",
-    //   linkTo:"",
-    //   icon: <i className="fas fa-smile text-lg"></i>
-    // },
-
-    // {
-    //   title: "Breakfast",
-    //   linkTo:"",
-    //   icon:<i className="fas fa-bread-slice	text-lg"></i>
-    // },
     {
       title: t("Services"),
       linkTo: "services",
@@ -53,20 +38,10 @@ const NavLinks = (props) => {
         />
       ),
     },
-    // {
-    //   title: "Dinner",
-    //   linkTo:"",
-    //   icon: <i className="fas fa-pizza-slice text-lg"></i>,
 
-    // },
-    // {
-    //   title: "Shower",
-    //   linkTo:"",
-    //   icon: <i className="fas fa-shower text-lg"></i>,
-    // },
     {
       title: t("Report"),
-      linkTo: "",
+      linkTo: "reports",
       icon: (
         <DocumentIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />
       ),
@@ -76,75 +51,6 @@ const NavLinks = (props) => {
       linkTo: "viewPeople",
       icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />,
     },
-    // {
-    //   title: "View all Properties",
-    //   linkTo: "viewAllProperties",
-    //   icon: <i className="fas fa-home text-lg"></i>,
-    // },
-    // {
-    //   title: "Junaid",
-    //   linkTo: "junaid",
-    //   icon: <i className="fas fa-home text-lg"></i>,
-    // },
-    // {
-    //   title: "Location",
-    //   linkTo: "addLocation",
-    //   icon: <i className="fas fa-map-marker-alt text-lg pl-1"></i>,
-    // },
-    // {
-    //   title: "Amenity",
-    //   linkTo: "addAmenities",
-    //   icon: <img src={amenity} alt="Amenity" className="w-5 invert" />,
-    // },
-    // {
-    //   title: "Unity Type",
-    //   linkTo: "addUnitType",
-    //   icon: <img src={unitType} alt="Unit Type" className="w-5 invert" />,
-    // },
-    // {
-    //   title: "Developer",
-    //   linkTo: "addDeveloper",
-    //   icon: <i className="fa fa-user-plus text-lg"></i>,
-    // },
-    // {
-    //   title: "Blog",
-    //   linkTo: "addBlog",
-    //   icon: <Blog fill="white" width="1.15rem" height="1.15rem" />,
-    // },
-    // {
-    //   title: "Contacts",
-    //   linkTo: "contacts",
-    //   icon: <i className="fa-regular fa-address-book text-lg"></i>,
-    // },
-    // {
-    //   title: "View Appraisals",
-    //   linkTo: "viewAppraisals",
-    //   icon: <i className="fa-solid fa-person-circle-check text-lg"></i>,
-    // },
-
-    // {
-    //   title: "View All Users",
-    //   linkTo: "viewAllUsers",
-    //   icon: <i className="fa-solid fa-user text-lg"></i>,
-    // },
-    // {
-    //   title: "View All Leads",
-    //   linkTo: "viewAllLeads",
-    //   icon: <i className="fa-solid fa-cog text-lg"></i>,
-    // },
-    //  {
-    //   title: "View User Properties",
-    //   linkTo: "viewUsersProperties",
-    //   icon: <i className="fas fa-home text-lg"></i>,
-    // },
-    // {
-    //   title: "User Property",
-    //   linkTo: "addUserProperty",
-    //   // icon: <i className="fas fa-home"></i>,
-    //   icon: (
-    //     <img src={addProperty} alt="Add Property" className="w-6 invert"></img>
-    //   ),
-    // },
   ];
 
   return (

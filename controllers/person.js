@@ -21,7 +21,8 @@ module.exports = {
                 skip: +page < 1 ? 0 : +page * limit,
                 take: +limit,
                 include: {
-                    Family: true
+                    Family: true,
+                    Documents: true,
                 }
             });
             const count = await client.person.count({ where });
@@ -39,7 +40,8 @@ module.exports = {
                     id: +id
                 },
                 include: {
-                    Family: true
+                    Family: true,
+                    Documents: true,
                 }
             });
             res.json({ persons });
@@ -51,7 +53,9 @@ module.exports = {
     async createPerson(req, res) {
         try {
             const { body, files } = req
-            const image = files && files.length && files[0].filename
+            const image = files?.['SelectedImages']?.[0].filename;
+            const documentUrls = req.files?.['Docs']?.map(file => ({ documentName: file.filename }));
+
             const { bornOn, family, ...rest } = body
             const familyArray = family ? JSON.parse(family) : []
             const person = await client.person.create({
@@ -65,8 +69,12 @@ module.exports = {
                         Family: {
                             create: familyArray
                         }
+                    }),
+                    ...(documentUrls && documentUrls.length && {
+                        Documents: {
+                            create: documentUrls
+                        }
                     })
-
                 }
             })
             res.status(201).json(person);
