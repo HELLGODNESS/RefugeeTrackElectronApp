@@ -106,7 +106,7 @@ export default function ViewPeople() {
       id: "actions",
       label: "",
       component: (data, setData) => (
-        <div className="space-x-3 text-right mr-1.5">
+        <div className="space-x-1.5 text-right mr-1.5">
           <button
             className=" no-focus"
             title="User Data"

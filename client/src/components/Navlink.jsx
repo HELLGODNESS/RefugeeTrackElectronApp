@@ -55,7 +55,7 @@ const NavLinks = (props) => {
 
   return (
     <ul
-      className="flex flex-col gap-1 text-gray-300 my-4 font-semibold w-full h-full"
+      className="flex flex-col gap-1 text-gray-300 mt-8 font-semibold w-full h-full"
       onMouseEnter={!props.isButtonClicked ? props.openDrawer : undefined}
       onMouseLeave={!props.isButtonClicked ? props.closeDrawer : undefined}
     >

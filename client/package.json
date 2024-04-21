@@ -7,7 +7,8 @@
   "homepage": "./",
   "build": {
     "appId": "com.example.myapp",
-    "productName": "My Electron App",
+    "productName": "App Mensa",
+    "icon": "./src/logo.svg",
     "directories": {
       "output": "dist",
       "buildResources": "assets"
@@ -21,11 +22,6 @@
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.3",
     "@heroicons/vue": "^2.1.1",
@@ -33,9 +29,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "apexcharts": "^3.48.0",
+    "apexcharts": "^3.49.0",
     "axios": "^1.6.8",
-    "electron-builder": "^24.13.3",
+    "date-fns": "^3.6.0",
     "electron-is-dev": "^1.2.0",
     "flag-icon-css": "^4.1.7",
     "flag-icons": "^7.2.1",
@@ -60,6 +56,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "package": "electron-builder",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
     "electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",

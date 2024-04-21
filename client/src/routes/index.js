@@ -20,6 +20,10 @@ export default function Router() {
           element: <Home />
         },
         {
+          path: "reports",
+          element: <Home />
+        },
+        {
           path: "Services",
           element: <Services />,
 

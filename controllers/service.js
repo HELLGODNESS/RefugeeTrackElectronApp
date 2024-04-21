@@ -1,8 +1,82 @@
+const { format, startOfDay, endOfDay, eachDayOfInterval, subDays } = require("date-fns");
 const { client } = require("../utils/prisma-client");
 const path = require('path')
 
 
+const getTimeSeries = (list, timeFrom, timeTo) => {
+    const getInterval = eachDayOfInterval({
+        start: new Date(timeFrom),
+        end: new Date(timeTo),
+    });
+
+    if (getInterval && getInterval.length) {
+        const getObjs = getInterval.map((intr) => {
+            let count = 0;
+            const intervalToString = format(new Date(intr), 'yyyy-MM-dd');
+            list.forEach((obj) => {
+                const created = format(new Date(obj.createdAt), 'yyyy-MM-dd');
+                if (created === intervalToString) {
+                    count++;
+                }
+            });
+            return {
+                time: intervalToString,
+                count: count,
+            };
+        });
+        return getObjs;
+    }
+};
+
 module.exports = {
+    async getStats(req, res) {
+        try {
+            const timeFrom = subDays(startOfDay(new Date()), 7);
+            const timeTo = endOfDay(new Date());
+
+            const services = await client.service.findMany({
+                where: {
+                    deletedAt: null,
+                    createdAt: {
+                        gte: timeFrom,
+                        lte: timeTo
+                    }
+                },
+                select: {
+                    createdAt: true,
+                    id: true,
+                    service: true,
+                    person: {
+                        select: {
+                            child: true
+                        }
+                    }
+                }
+            });
+
+            const takeAways = []
+            services.forEach(x => {
+                if (x.service.toUpperCase() == "TAKEAWAY_PACKAGE") {
+                    takeAways.push(x)
+                    if (+x.person.child) {
+                        Array.from({ length: +x.person.child }, (_, i) => {
+                            takeAways.push(x)
+                        })
+                    }
+                }
+            })
+            res.json({
+                cafeteria: getTimeSeries(services.filter(x => x.service.toUpperCase() == "CAFETERIA"), timeFrom, timeTo),
+                takeawayPackage: getTimeSeries(takeAways, timeFrom, timeTo),
+                showers: getTimeSeries(services.filter(x => x.service.toUpperCase() == "SHOWERS"), timeFrom, timeTo),
+                covers: getTimeSeries(services.filter(x => x.service.toUpperCase() == "COVERS"), timeFrom, timeTo),
+                medicines: getTimeSeries(services.filter(x => x.service.toUpperCase() == "MEDICINES"), timeFrom, timeTo),
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    },
     async getAllServices(req, res) {
         try {
             const { page = 0, limit = 20, search, date, service } = req.query;
@@ -50,13 +124,31 @@ module.exports = {
                     service: 'CAFETERIA'
                 }
             });
-            const takeawayPackage = await client.service.count({
+            const takeawayPackage = await client.service.findMany({
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: 'TAKEAWAY_PACKAGE'
+                    service: "TAKEAWAY_PACKAGE"
+                },
+                select: {
+                    service: true,
+                    person: {
+                        select: {
+                            child: true
+                        }
+                    }
                 }
             });
+
+            let takeAways = 0
+            takeawayPackage.forEach(x => {
+                if (x.service.toUpperCase() == "TAKEAWAY_PACKAGE") {
+                    takeAways += 1
+                    if (+x.person.child) {
+                        takeAways += +x.person.child
+                    }
+                }
+            })
 
             const showers = await client.service.count({
                 where: {
@@ -84,7 +176,7 @@ module.exports = {
 
             res.json({
                 cafeteria,
-                takeawayPackage,
+                takeawayPackage: takeAways,
                 showers,
                 covers,
                 medicines
