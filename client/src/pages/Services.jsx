@@ -125,10 +125,10 @@ function Services() {
               className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
             >
 
-              <option value={"MENSA"}>{t("Cafeteria")}</option>
-              <option value={"PACCO D'ASPORTO"}>{t("Takeaway Package")}</option>
-              <option value={"DOCCIE"}>{t("Shower")}</option>
-              <option value={"COPERTE"}>{t("Covers")}</option>
+              <option value={"CAFETERIA"}>{t("Cafeteria")}</option>
+              <option value={"TAKEAWAY_PACKAGE"}>{t("Takeaway Package")}</option>
+              <option value={"SHOWERS"}>{t("Shower")}</option>
+              <option value={"COVERS"}>{t("Covers")}</option>
               <option value={"MEDICINES"}>{t("Medicines")}</option>
             </select>
 
