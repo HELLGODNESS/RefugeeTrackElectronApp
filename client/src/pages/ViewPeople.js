@@ -17,6 +17,7 @@ import Modal from "../components/Modal";
 import IDCard from "../components/IDCard";
 import UserData from "../components/UserData";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 export default function ViewPeople() {
   const [page, setPage] = useState(0);
@@ -43,9 +44,6 @@ export default function ViewPeople() {
     // dispatch(updateUserStatus(data._id, { isPro: !data.isPro }));
   };
 
-  function deleteFromTable(data) {
-    // dispatch(deleteUser(data._id));
-  }
 
   const [tableHeaders, setTableHeaders] = useState([
     { id: "id", label: "ID" },
@@ -124,7 +122,7 @@ export default function ViewPeople() {
           <button
             className=" no-focus"
             title="Delete"
-            onClick={(e) => deleteFromTable(data)}
+            // onClick={(e) => deleteFromTable(data)}
           >
             <PencilIcon className="w-5 h-5" />
           </button>
@@ -140,7 +138,8 @@ export default function ViewPeople() {
     },
   ]);
 
-  useEffect(() => {
+
+  const getPeople = () => {
     setLoading(true);
     axios
       .get("http://localhost:4000/person", {
@@ -155,7 +154,26 @@ export default function ViewPeople() {
         console.log(err);
         setLoading(false);
       });
+  }
+
+  useEffect(() => {
+    getPeople()
   }, [limit, page, searchQuery]);
+
+  function deleteFromTable(data) {
+    axios
+      .delete("http://localhost:4000/person", {
+        params: { id: data.id },
+      })
+      .then((res) => {
+        getPeople()
+        toast.success("Person Deleted successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(JSON.stringify(err));
+      });
+  }
 
   const handleSearchInputChange = (e) => {
     console.log(e.target.value);

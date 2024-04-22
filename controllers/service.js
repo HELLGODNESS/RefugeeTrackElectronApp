@@ -40,6 +40,9 @@ module.exports = {
                     createdAt: {
                         gte: timeFrom,
                         lte: timeTo
+                    },
+                    person: {
+                        deletedAt: null
                     }
                 },
                 select: {
@@ -93,7 +96,10 @@ module.exports = {
                             { cell: { contains: search } },
                         ],
                     }
-                })
+                }),
+                person: {
+                    deletedAt: null
+                }
             }
             const services = await client.service.findMany({
                 where,
@@ -121,14 +127,20 @@ module.exports = {
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: 'CAFETERIA'
+                    service: 'CAFETERIA',
+                    person: {
+                        deletedAt: null
+                    }
                 }
             });
             const takeawayPackage = await client.service.findMany({
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: "TAKEAWAY_PACKAGE"
+                    service: "TAKEAWAY_PACKAGE",
+                    person: {
+                        deletedAt: null
+                    }
                 },
                 select: {
                     service: true,
@@ -154,7 +166,10 @@ module.exports = {
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: 'SHOWERS'
+                    service: 'SHOWERS',
+                    person: {
+                        deletedAt: null
+                    }
                 }
             })
 
@@ -162,7 +177,10 @@ module.exports = {
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: 'COVERS'
+                    service: 'COVERS',
+                    person: {
+                        deletedAt: null
+                    }
                 }
             })
 
@@ -170,7 +188,10 @@ module.exports = {
                 where: {
                     date: date,
                     deletedAt: null,
-                    service: 'MEDICINES'
+                    service: 'MEDICINES',
+                    person: {
+                        deletedAt: null
+                    }
                 }
             })
 

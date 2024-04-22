@@ -47,7 +47,7 @@ const NavLinks = (props) => {
       ),
     },
     {
-      title: t("Users"),
+      title: t("View People"),
       linkTo: "viewPeople",
       icon: <UsersIcon className="h-7 w-7 text-gray-300" aria-hidden="true" />,
     },

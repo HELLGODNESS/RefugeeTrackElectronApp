@@ -8,6 +8,7 @@ import html2canvas from "html2canvas";
 import { useEffect, useRef } from "react";
 import "../styles/People.css";
 import "../styles/IDCard.css";
+import { nationalities } from "../utils/nationalities";
 
 export default function People() {
   const { t, i18n } = useTranslation();
@@ -59,6 +60,7 @@ export default function People() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+
       // Define formState and make the POST request
       const formState = new FormData();
       Object.keys(formData).forEach((key) => {
@@ -69,6 +71,9 @@ export default function People() {
       // }
       if (images) {
         formState.append("SelectedImages", images);
+      } else {
+        toast.error("Please select an image")
+        return;
       }
       if (docs && docs.length) {
         for (let i = 0; i < docs.length; i++) {
@@ -80,7 +85,8 @@ export default function People() {
         formState
       );
       setFormData({});
-
+      setImages();
+      setDocs()
       // Extract the unique identifier (e.g., user ID) from the response
       const userId = response.data.id;
       setBarcodeValue(userId);
@@ -134,7 +140,8 @@ export default function People() {
 
   return (
     <section className=" bg-zinc-50  overflow-scroll h-screen w-[100%] ">
-      <form className=" lg:col-span-9" action="#" method="POST">
+      <form className=" lg:col-span-9" method="post"
+        onSubmit={onSubmitHandler}>
         {/* Profile section */}
         <div className="px-4 py-6 sm:p-6 lg:pb-8 border border-bottom">
 
@@ -161,8 +168,9 @@ export default function People() {
                       type="text"
                       name="firstName"
                       id="firstName"
+                      required
                       onChange={inputHandler}
-                      value={formData.firstName}
+                      value={formData.firstName || ''}
                       autoComplete="given-name"
                       className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
@@ -180,10 +188,11 @@ export default function People() {
                       type="text"
                       name="lastName"
                       id="lastName"
+                      required
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                      value={formData.lastName}
+                      value={formData.lastName || ''}
                     />
                   </div>
                 </div>
@@ -199,7 +208,7 @@ export default function People() {
                     <select
                       id="maritalStatus"
                       name="maritalStatus"
-                      value={formData.maritalStatus}
+                      value={formData.maritalStatus || ''}
                       onChange={inputHandler}
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
@@ -223,7 +232,7 @@ export default function People() {
                     <select
                       id="gender"
                       name="gender"
-                      value={formData.gender}
+                      value={formData.gender || ''}
                       onChange={inputHandler}
                       autoComplete="Gender"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
@@ -246,7 +255,7 @@ export default function People() {
                       type="text"
                       name="nationality"
                       id="nationality"
-                      value={formData.nationality}
+                      value={formData.nationality || ''}
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -266,7 +275,7 @@ export default function People() {
                       type="date"
                       name="bornOn"
                       id="bornOn"
-                      value={formData.bornOn}
+                      value={formData.bornOn || ''}
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -285,7 +294,7 @@ export default function People() {
                       type="text"
                       name="bornIn"
                       id="bornIn"
-                      value={formData.bornIn}
+                      value={formData.bornIn || ''}
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -307,7 +316,7 @@ export default function People() {
                       id="child"
                       min="0"
                       max="100"
-                      value={formData.child}
+                      value={formData.child || ''}
                       onChange={(e) => {
                         inputHandler(e);
                         setFieldSets([...Array.from({ length: +e.target.value }, (_, index) => ({ id: index + 1 }))])
@@ -330,7 +339,7 @@ export default function People() {
                       name="emailAddress"
                       type="email"
                       onChange={inputHandler}
-                      value={formData.emailAddress}
+                      value={formData.emailAddress || ''}
                       autoComplete="email"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
@@ -349,7 +358,7 @@ export default function People() {
                       type="text"
                       name="cell"
                       id="cell"
-                      value={formData.cell}
+                      value={formData.cell || ''}
                       onChange={inputHandler}
                       autoComplete="address-level2"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -369,13 +378,39 @@ export default function People() {
                       type="text"
                       name="religion"
                       id="religion"
-                      value={formData.religion}
+                      value={formData.religion || ''}
                       onChange={inputHandler}
                       autoComplete="address-level2"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
+                <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
+                  <label
+                    htmlFor="allergies"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    {t("Allergies")}
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="allergies"
+                      name="allergies"
+                      value={formData.allergies || ''}
+                      onChange={inputHandler}
+                      autoComplete="allergies"
+                      className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
+                      defaultValue={"None"}
+                    >
+                      <option value={"None"}>{t("None")}</option>
+                      <option value={"Vegan"}>{t("Vegan")}</option>
+                      <option value={"Vegetarian"}>{t("Vegetarian")}</option>
+                      <option value={"Kosher"}>{t("Kosher")}</option>
+                      <option value={"Gluten Free"}>{t("Gluten Free")}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
                   <label
                     htmlFor="document"
@@ -387,13 +422,13 @@ export default function People() {
                     <select
                       id="document"
                       name="document"
-                      value={formData.document}
+                      value={formData.document || ''}
                       onChange={inputHandler}
                       autoComplete="document"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
-                      <option value={"Single"}>{t("Passport")}</option>
-                      <option value={"Married"}>{t("Identity Card")}</option>
+                      <option value={"Passport"}>{t("Passport")}</option>
+                      <option value={"Identity Card"}>{t("Identity Card")}</option>
                     </select>
                   </div>
                 </div>
@@ -410,7 +445,7 @@ export default function People() {
                       name="documentNumber"
                       type="text"
                       onChange={inputHandler}
-                      value={formData.documentNumber}
+                      value={formData.documentNumber || ''}
                       autoComplete="Numero Documento"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
@@ -437,15 +472,18 @@ export default function People() {
                     {t("Residency Permit")}
                   </label>
                   <div className="mt-2">
-                    <input
-                      type="text"
-                      name="residencyPermit"
+                    <select
                       id="residencyPermit"
-                      value={formData.residencyPermit}
+                      name="residencyPermit"
+                      value={formData.residencyPermit || ''}
                       onChange={inputHandler}
-                      autoComplete="family-name"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                    />
+                      autoComplete="residencyPermit"
+                      className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
+                    >
+                      <option value={"Yes"}>{t("Yes")}</option>
+                      <option value={"No"}>{t("No")}</option>
+                      <option value={"Pending"}>{t("Pending")}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -550,7 +588,7 @@ export default function People() {
                   type="text"
                   name="city"
                   id="city"
-                  value={formData.city}
+                  value={formData.city || ''}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -590,7 +628,7 @@ export default function People() {
                   name="zip"
                   id="zip"
                   onChange={inputHandler}
-                  value={formData.zip}
+                  value={formData.zip || ''}
                   autoComplete="postal-code"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
@@ -609,16 +647,181 @@ export default function People() {
                   type="text"
                   name="streetAddress"
                   id="streetAddress"
-                  value={formData.streetAddress}
+                  value={formData.streetAddress || ''}
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
+
+            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 ">
+              <label
+                htmlFor="streetAddress"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Nationality")}
+              </label>
+              <div className="mt-2">
+                <select
+                  id="nationality"
+                  name="nationality"
+                  value={formData.nationality || ''}
+                  onChange={inputHandler}
+                  autoComplete="nationality"
+                  className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
+                >{nationalities.map((nationality) => <option value={nationality}>{nationality}</option>)}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div className="mt-12 border-b px-4 sm:px-6 pb-12 ">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">
+            {t("Education/Work")}
+          </h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-2 sm:col-start-1 mt-2 gap-x-6 gap-y-8">
+              <label
+                htmlFor="qualification"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Qualification")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="qualification"
+                  id="qualification"
+                  value={formData.qualification || ''}
+                  onChange={inputHandler}
+                  autoComplete="address-level2"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
+              <label
+                htmlFor="currentProfessionalStatus"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Current Professional Status")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="currentProfessionalStatus"
+                  id="currentProfessionalStatus"
+                  onChange={inputHandler}
+                  autoComplete="address-level1"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8">
+              <label
+                htmlFor="monthlyIncome"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Monthly Income")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="monthlyIncome"
+                  id="monthlyIncome"
+                  onChange={inputHandler}
+                  value={formData.monthlyIncome || ''}
+                  autoComplete="postal-code"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 ">
+              <label
+                htmlFor="work"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Work Carried out")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="work"
+                  id="work"
+                  value={formData.work || ''}
+                  onChange={inputHandler}
+                  autoComplete="address-level2"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 flex">
+              <div className="flex-1">
+                <label
+                  htmlFor="lastJobFrom"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Last Job Done From
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="date"
+                    name="lastJobFrom"
+                    id="lastJobFrom"
+                    value={formData.lastJobFrom || ''}
+                    onChange={inputHandler}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              <div className="flex-1 ml-4">
+                <label
+                  htmlFor="lastJobTo"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Last Job Done To
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="date"
+                    name="lastJobTo"
+                    id="lastJobTo"
+                    value={formData.lastJobTo || ''}
+                    onChange={inputHandler}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
+
+
+
+
+
+
+
+
         <div className="mt-12 border-b px-4 sm:px-6 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             {t("About")}
@@ -773,15 +976,8 @@ export default function People() {
             </div>
           </div>
         </div>
-      </form>
 
-      <form
-        action="/submit"
-        method="post"
-        onSubmit={onSubmitHandler}
-        className="p-8  grid w-[97%] "
-      >
-        <div className="mt-6 flex items-center justify-end gap-x-6">
+        <div className="mt-6 flex items-center justify-end gap-x-6 mr-10">
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
@@ -796,6 +992,7 @@ export default function People() {
           </button>
         </div>
       </form>
+
     </section>
   );
 }

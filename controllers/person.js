@@ -7,6 +7,7 @@ module.exports = {
         try {
             const { page = 0, limit = 20, search } = req.query;
             const where = {
+                deletedAt: null,
                 ...(+search >= 1 ? { id: +search } : {
                     OR: [
                         { firstName: { contains: search } },
@@ -78,6 +79,24 @@ module.exports = {
                 }
             })
             res.status(201).json(person);
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({ message: error.message });
+        }
+    },
+
+    async deletePerson(req, res) {
+        try {
+            const { id } = req.query;
+            const serviceDeleted = await client.person.update({
+                where: {
+                    id: +id
+                },
+                data: {
+                    deletedAt: new Date()
+                }
+            })
+            res.status(201).json(serviceDeleted);
         } catch (error) {
             console.log(error)
             res.status(400).json({ message: error.message });

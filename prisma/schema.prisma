@@ -27,15 +27,22 @@ model Person {
   child         String?
   religion      String?
 
-  pec           String?
-  city          String?
-  region        String?
-  state         String?
-  country       String?
-  zip           String?
-  streetAddress String?
-  about         String?
-  image         String?
+  pec                       String?
+  city                      String?
+  region                    String?
+  state                     String?
+  country                   String?
+  allergies                   String?
+  qualification             String?
+  currentProfessionalStatus String?
+  monthlyIncome             String?
+  work                      String?
+  lastJobFrom               String?
+  lastJobTo                 String?
+  zip                       String?
+  streetAddress             String?
+  about                     String?
+  image                     String?
 
   document        String?
   documentNumber  String?
