@@ -251,7 +251,7 @@ export default function People() {
                     {t("Nationality")}
                   </label>
                   <div className="mt-2">
-                    <input
+                    <select
                       type="text"
                       name="nationality"
                       id="nationality"
@@ -259,7 +259,8 @@ export default function People() {
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                    />
+                    >
+                    </select>
                   </div>
                 </div>
 
@@ -407,6 +408,7 @@ export default function People() {
                       <option value={"Vegetarian"}>{t("Vegetarian")}</option>
                       <option value={"Kosher"}>{t("Kosher")}</option>
                       <option value={"Gluten Free"}>{t("Gluten Free")}</option>
+                      <option value={"Halal"}>{t("Halal")}</option>
                     </select>
                   </div>
                 </div>
@@ -778,7 +780,8 @@ export default function People() {
                   htmlFor="lastJobFrom"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Last Job Done From
+                  
+                  {t("Last Job Done From")}
                 </label>
                 <div className="mt-2">
                   <input
@@ -797,7 +800,7 @@ export default function People() {
                   htmlFor="lastJobTo"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Last Job Done To
+                  {t("Last Job Done To")}
                 </label>
                 <div className="mt-2">
                   <input
