@@ -22,7 +22,7 @@ function IDCard(props) {
               {image && (
                 <div className="">
                   <img
-                    src={`http://localhost:4000/file/${image && image}`}
+                    src={`http://192.168.119.33:4000/file/${image && image}`}
                     // src={URL.createObjectURL(image)}
                     alt="User"
                   />

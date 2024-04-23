@@ -22,7 +22,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/person", {
+      .get("http://192.168.119.33:4000/person", {
         params: { search: debounceSearch },
       })
       .then((res) => {
@@ -35,7 +35,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
 
   const handleService = (person) => {
     axios
-      .post("http://localhost:4000/service", {
+      .post("http://192.168.119.33:4000/service", {
         personId: person.id,
         date: new Date().toDateString(),
         service: activeSession,
@@ -98,7 +98,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
                             <img
                               src={
                                 person.image
-                                  ? `http://localhost:4000/file/${person.image}`
+                                  ? `http://192.168.119.33:4000/file/${person.image}`
                                   : "user.png"
                               }
                               alt=""
@@ -126,7 +126,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
                       <img
                         src={
                           activeOption.image
-                            ? `http://localhost:4000/file/${activeOption.image}`
+                            ? `http://192.168.119.33:4000/file/${activeOption.image}`
                             : "user.png"
                         }
                         alt=""

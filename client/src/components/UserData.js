@@ -60,7 +60,7 @@ function UserData(props) {
                   <div className="">
                     <img
                       className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
-                      src={`http://localhost:4000/file/${image && image}`}
+                      src={`http://192.168.119.33:4000/file/${image && image}`}
                       alt="User"
                     />
                   </div>

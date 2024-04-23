@@ -17,7 +17,7 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    axios.get("http://localhost:4000/service/count", { params: { date: new Date().toDateString() } })
+    axios.get("http://192.168.119.33:4000/service/count", { params: { date: new Date().toDateString() } })
       .then((res) => {
         setCounts(res.data);
       }).catch((err) => {

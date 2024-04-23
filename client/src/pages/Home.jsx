@@ -62,7 +62,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/service/count", {
+      .get("http://192.168.119.33:4000/service/count", {
         params: { date: new Date().toDateString() },
       })
       .then((res) => {
@@ -71,7 +71,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-    axios.get("http://localhost:4000/service/stats", { params: { date: new Date().toDateString() } })
+    axios.get("http://192.168.119.33:4000/service/stats", { params: { date: new Date().toDateString() } })
       .then((res) => {
         setStats(res.data);
       }).catch((err) => {
@@ -137,7 +137,7 @@ export default function Home() {
         ))}
       </div>
       <div className='p-6 shadow-md  rounded-lg bg-white mt-4'>
-        <h1 className='text-sm font-medium text-gray-600'>Last 7 Days Stats</h1>
+        <h1 className='text-sm font-medium text-gray-600'>Statistiche Ultimi 7 Giorni</h1>
         <Chart
           options={options}
           series={series}

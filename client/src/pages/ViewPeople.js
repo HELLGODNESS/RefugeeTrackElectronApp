@@ -94,7 +94,7 @@ export default function ViewPeople() {
           className="w-16 h-16 rounded-full"
           // src={data.Image}
           src={
-            data.image ? `http://localhost:4000/file/${data.image}` : "user.png"
+            data.image ? `http://192.168.119.33:4000/file/${data.image}` : "user.png"
           }
           alt="profile"
         />
@@ -142,7 +142,7 @@ export default function ViewPeople() {
   const getPeople = () => {
     setLoading(true);
     axios
-      .get("http://localhost:4000/person", {
+      .get("http://192.168.119.33:4000/person", {
         params: { page, limit, search: searchQuery },
       }) // Pass searchQuery to API call
       .then((res) => {
@@ -162,7 +162,7 @@ export default function ViewPeople() {
 
   function deleteFromTable(data) {
     axios
-      .delete("http://localhost:4000/person", {
+      .delete("http://192.168.119.33:4000/person", {
         params: { id: data.id },
       })
       .then((res) => {

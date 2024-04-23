@@ -48,7 +48,7 @@ function Services() {
         <img
           className="w-16 h-16 rounded-full"
           // src={data.Image}
-          src={data.image ? `http://localhost:4000/file/${data.image}` : 'user.png'}
+          src={data.image ? `http://192.168.119.33:4000/file/${data.image}` : 'user.png'}
           alt="profile"
         />
       ),
@@ -73,7 +73,7 @@ function Services() {
   const getServices = () => {
     setLoading(true);
     axios
-      .get("http://localhost:4000/service", {
+      .get("http://192.168.119.33:4000/service", {
         params: { page, limit, date: new Date().toDateString(), service: session },
       }) // Pass searchQuery to API call
       .then((res) => {
@@ -94,7 +94,7 @@ function Services() {
 
   function deleteFromTable(data) {
     axios
-      .delete("http://localhost:4000/service", {
+      .delete("http://192.168.119.33:4000/service", {
         params: { id: data.id },
       })
       .then((res) => {

@@ -81,7 +81,7 @@ export default function People() {
         }
       }
       const response = await axios.post(
-        "http://localhost:4000/person",
+        "http://192.168.119.33:4000/person",
         formState
       );
       setFormData({});
@@ -455,19 +455,6 @@ export default function People() {
                     />
                   </div>
                 </div>
-
-                <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
-                  <label className="block text-sm font-medium leading-6 text-gray-900" for="file_input">Upload file</label>
-                  <div className="mt-2">
-                    <input
-                      className="block w-full rounded-md border-0 py-[3px] shadow-sm ring-1 ring-inset bg-white ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" id="multiple_files"
-                      type="file"
-                      multiple
-                      onChange={(e) => setDocs(e.target.files)}
-                    />
-
-                  </div>
-                </div>
                 <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
                   <label
                     htmlFor="residencyPermit"
@@ -685,7 +672,7 @@ export default function People() {
                 {t("Qualification")}
               </label>
               <div className="mt-2">
-                <input
+                <select
                   type="text"
                   name="qualification"
                   id="qualification"
@@ -693,7 +680,12 @@ export default function People() {
                   onChange={inputHandler}
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                />
+                >
+                  <option value={"Degree"}>{t("Degree")}</option>
+                  <option value={"High School Diploma"}>{t("High School Diploma")}</option>
+                  <option value={"Mid School Diploma"}>{t("Mid School Diploma")}</option>
+                  <option value={"Elementary School Diploma"}>{t("Elementary School Diploma")}</option>
+              </select>
               </div>
             </div>
 
