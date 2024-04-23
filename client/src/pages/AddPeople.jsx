@@ -213,7 +213,8 @@ export default function People() {
                       autoComplete="Marital status"
                       className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
                     >
-                      <option value={"Single"}>{t("Celibate")}</option>
+                      <option value={"Celibe"}>{t("Celibate")}</option>
+                      <option value={"Nubile"}>{t("Nubile")}</option>
                       <option value={"Married"}>{t("Married")}</option>
                       <option value={"Widowed"}>{t("Widower")}</option>
                       <option value={"Divorced"}>{t("Divorced")}</option>
@@ -239,6 +240,7 @@ export default function People() {
                     >
                       <option value={"Male"}>{t("Male")}</option>
                       <option value={"Female"}>{t("Female")}</option>
+                      <option value={"Other"}>{t("Other")}</option>
                     </select>
                   </div>
                 </div>
@@ -259,7 +261,7 @@ export default function People() {
                       onChange={inputHandler}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                    >
+                    >{nationalities.map((nationality) => <option value={nationality}>{nationality}</option>)}
                     </select>
                   </div>
                 </div>
@@ -654,26 +656,6 @@ export default function People() {
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 ">
-              <label
-                htmlFor="streetAddress"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                {t("Nationality")}
-              </label>
-              <div className="mt-2">
-                <select
-                  id="nationality"
-                  name="nationality"
-                  value={formData.nationality || ''}
-                  onChange={inputHandler}
-                  autoComplete="nationality"
-                  className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
-                >{nationalities.map((nationality) => <option value={nationality}>{nationality}</option>)}
-                </select>
               </div>
             </div>
           </div>

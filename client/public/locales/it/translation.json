@@ -21,8 +21,9 @@
   "User Detail" : "Dettaglio utente",
   "Address Information" : "Informazioni sull'indirizzo",
   "Cancel" : "Annulla",
-  "Male" : "Maschio",
-  "Female" : "Femmina",
+  "Male" : "Uomo",
+  "Female" : "Donna",
+  "Other":"Preferisco non specificarlo",
   "This information will be displayed publicly so be careful what you share." : 
   "Queste informazioni verranno visualizzate pubblicamente, quindi fai attenzione a ciò che condividi.",
   "People" : "Persone",
