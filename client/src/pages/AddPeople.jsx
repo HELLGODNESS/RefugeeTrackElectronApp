@@ -437,6 +437,9 @@ export default function People() {
                     </select>
                   </div>
                 </div>
+
+
+
                 <div className="sm:col-span-2 md:col-span-1 mt-2 gap-x-6 gap-y-8">
                   <label
                     htmlFor="documentNumber"

@@ -27,7 +27,6 @@ model Person {
   child         String?
   religion      String?
 
-  pec                       String?
   city                      String?
   region                    String?
   state                     String?

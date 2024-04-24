@@ -8,6 +8,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import config from "../config";
+import toast from "react-hot-toast";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -48,6 +50,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
         setQuery("");
       })
       .catch((err) => {
+        toast.error(err.response.data.message);
         console.log(err);
       });
   };

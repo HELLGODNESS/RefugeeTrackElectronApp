@@ -12,10 +12,12 @@ import Paginator from '../components/paginator';
 import Modal from '../components/Modal';
 import UserData from '../components/UserData';
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
+import Barchart from '../components/Barchart';
 
 export default function Reports() {
   const { t, i18n } = useTranslation();
   const [stats, setStats] = React.useState({});
+  const [barchartStats, setBarchartStats] = React.useState({});
 
   const [counts, setCounts] = useState({});
   const [page, setPage] = useState(0);
@@ -25,6 +27,11 @@ export default function Reports() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [peopleData, setPeopleData] = useState(false);
+
+  const [id, setId] = useState();
+  const [name, setName] = useState();
+  const [child, setChild] = useState();
+  const [service, setService] = useState("CAFETERIA");
 
   const [value, setValue] = useState({
     startDate: subDays(new Date(), 7),
@@ -124,6 +131,30 @@ export default function Reports() {
     },
   ]);
 
+  const getServices = () => {
+    axios
+      .get(`${config.ipAddress}/service`, {
+        params: {
+
+          ...(id && { id }),
+          ...(service && { service }),
+          ...(child && { child }),
+          ...(name && { name }),
+          ...(value.startDate && { startDate: value.startDate }),
+          ...(value.endDate && { endDate: value.endDate }),
+          page, limit
+        },
+      }) // Pass searchQuery to API call
+      .then((res) => {
+        setTableBodyList(res.data.list);
+        setCount(res.data.count);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }
   useEffect(() => {
     console.log(value, 'value')
     axios
@@ -143,22 +174,37 @@ export default function Reports() {
         console.log(err);
       });
 
-    setLoading(true);
-    axios
-      .get(`${config.ipAddress}/service`, {
-        params: { page, limit, date: new Date().toDateString(), service: "CAFETERIA" },
-      }) // Pass searchQuery to API call
+    axios.get(`${config.ipAddress}/service/barchart`, { params: { startDate: value.startDate, endDate: value.endDate } })
       .then((res) => {
-        setTableBodyList(res.data.list);
-        setCount(res.data.count);
-        setLoading(false);
-      })
-      .catch((err) => {
+        setBarchartStats(res.data);
+      }).catch((err) => {
         console.log(err);
-        setLoading(false);
       });
 
+    setLoading(true);
+
+    getServices();
   }, [value]);
+
+  const handleDownload = async () => {
+    try {
+      // Make a GET request to download the file
+      const response = await axios.get('http://localhost:4000/service/export', {
+        responseType: 'blob' // Set responseType to 'blob' to receive binary data
+      });
+
+      // Create a blob URL and trigger download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'generated_file.xlsx');
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  };
+
 
 
   const series = [
@@ -239,6 +285,12 @@ export default function Reports() {
           height={200}
         />
       </div>
+      <div className='p-6 shadow-md  rounded-lg bg-white mt-4'>
+        <Barchart
+          barchartStats={barchartStats}
+        />
+      </div>
+
 
 
     </div>
@@ -259,9 +311,8 @@ export default function Reports() {
                 type="number"
                 name="id"
                 id="id"
-
-                // onChange={inputHandler}
-                // value={formData.firstName || ''}
+                value={id}
+                onChange={(e) => setId(e.target.value)}
                 autoComplete="given-name"
                 className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               />
@@ -279,9 +330,8 @@ export default function Reports() {
                 type="text"
                 name="name"
                 id="name"
-
-                // onChange={inputHandler}
-                // value={formData.firstName || ''}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 autoComplete="given-name"
                 className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               />
@@ -299,9 +349,8 @@ export default function Reports() {
                 type="number"
                 name="Child"
                 id="Child"
-
-                // onChange={inputHandler}
-                // value={formData.firstName || ''}
+                value={child}
+                onChange={(e) => setChild(e.target.value)}
                 autoComplete="given-name"
                 className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               />
@@ -316,8 +365,8 @@ export default function Reports() {
             </label>
             <div className="mt-2">
               <select
-                // value={session}
-                // onChange={(e) => setSession(e.target.value)}
+                value={service}
+                onChange={(e) => setService(e.target.value)}
                 autoComplete="Marital status"
                 className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
               >
@@ -333,7 +382,7 @@ export default function Reports() {
 
           <div className="inline-flex">
             <div className="mt-8">
-              <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <button type="button" onClick={getServices} class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
@@ -341,7 +390,7 @@ export default function Reports() {
               </button>
             </div>
             <div className="mt-8">
-              <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <button onClick={handleDownload} type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <ArrowUpTrayIcon className='w-4 h-4' />
                 <span class="sr-only">Export</span>
               </button>
