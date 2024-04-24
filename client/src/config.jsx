@@ -1,4 +1,5 @@
 const config = {
+  ipAddress: "http://localhost:4000",
     contactDetails: {
       logo: "https://tailwindui.com/img/logos/mark.svg?color=yellow&shade=500",
       anaweenCoEmail: "Info@anaween.co",

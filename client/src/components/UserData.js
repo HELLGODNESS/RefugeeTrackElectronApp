@@ -2,6 +2,7 @@ import html2canvas from "html2canvas";
 import { t } from "i18next";
 import React, { useRef, useState } from "react";
 import {useTranslation} from "react-i18next";
+import config from "../config";
 
 
 
@@ -60,7 +61,7 @@ function UserData(props) {
                   <div className="">
                     <img
                       className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
-                      src={`http://192.168.119.33:4000/file/${image && image}`}
+                      src={`${config.ipAddress}/file/${image && image}`}
                       alt="User"
                     />
                   </div>

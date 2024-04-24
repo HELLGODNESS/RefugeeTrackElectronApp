@@ -4,6 +4,7 @@ import Services from "../pages/Services";
 import AddPeople from "../pages/AddPeople";
 import ViewPeople from "../pages/ViewPeople";
 import Home from "../pages/Home";
+import Reports from "../pages/Reports";
 
 export default function Router() {
   return useRoutes([
@@ -21,7 +22,7 @@ export default function Router() {
         },
         {
           path: "reports",
-          element: <Home />
+          element: <Reports />
         },
         {
           path: "Services",

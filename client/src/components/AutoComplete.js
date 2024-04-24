@@ -7,6 +7,7 @@ import useDebouncer from "../utils/useDebouncer";
 import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import config from "../config";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -20,9 +21,10 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
   const debounceSearch = useDebouncer(query, 500);
   console.log(people, "people");
 
+
   useEffect(() => {
     axios
-      .get("http://192.168.119.33:4000/person", {
+      .get(`${config.ipAddress}/person`, {
         params: { search: debounceSearch },
       })
       .then((res) => {
@@ -35,7 +37,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
 
   const handleService = (person) => {
     axios
-      .post("http://192.168.119.33:4000/service", {
+      .post(`${config.ipAddress}/service`, {
         personId: person.id,
         date: new Date().toDateString(),
         service: activeSession,
@@ -98,7 +100,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
                             <img
                               src={
                                 person.image
-                                  ? `http://192.168.119.33:4000/file/${person.image}`
+                                  ? `${config.ipAddress}/file/${person.image}`
                                   : "user.png"
                               }
                               alt=""
@@ -126,7 +128,7 @@ export default function AutoComplete({ activeSession, setAddPerson }) {
                       <img
                         src={
                           activeOption.image
-                            ? `http://192.168.119.33:4000/file/${activeOption.image}`
+                            ? `${config.ipAddress}/file/${activeOption.image}`
                             : "user.png"
                         }
                         alt=""

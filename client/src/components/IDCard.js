@@ -1,6 +1,7 @@
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import config from "../config";
 
 function IDCard(props) {
   const { firstName, lastName, cell, bornOn, streetAddress, city, image } =
@@ -22,7 +23,7 @@ function IDCard(props) {
               {image && (
                 <div className="">
                   <img
-                    src={`http://192.168.119.33:4000/file/${image && image}`}
+                    src={`${config.ipAddress}/file/${image && image}`}
                     // src={URL.createObjectURL(image)}
                     alt="User"
                   />

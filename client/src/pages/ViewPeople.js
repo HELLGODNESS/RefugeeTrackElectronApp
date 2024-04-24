@@ -18,6 +18,7 @@ import IDCard from "../components/IDCard";
 import UserData from "../components/UserData";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import config from "../config";
 
 export default function ViewPeople() {
   const [page, setPage] = useState(0);
@@ -94,7 +95,7 @@ export default function ViewPeople() {
           className="w-16 h-16 rounded-full"
           // src={data.Image}
           src={
-            data.image ? `http://192.168.119.33:4000/file/${data.image}` : "user.png"
+            data.image ? `${config.ipAddress}/file/${data.image}` : "user.png"
           }
           alt="profile"
         />
@@ -142,7 +143,7 @@ export default function ViewPeople() {
   const getPeople = () => {
     setLoading(true);
     axios
-      .get("http://192.168.119.33:4000/person", {
+      .get(`${config.ipAddress}/person`, {
         params: { page, limit, search: searchQuery },
       }) // Pass searchQuery to API call
       .then((res) => {
@@ -162,7 +163,7 @@ export default function ViewPeople() {
 
   function deleteFromTable(data) {
     axios
-      .delete("http://192.168.119.33:4000/person", {
+      .delete(`${config.ipAddress}/person`, {
         params: { id: data.id },
       })
       .then((res) => {

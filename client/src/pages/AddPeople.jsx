@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react";
 import "../styles/People.css";
 import "../styles/IDCard.css";
 import { nationalities } from "../utils/nationalities";
+import config from "../config";
 
 export default function People() {
   const { t, i18n } = useTranslation();
@@ -81,7 +82,7 @@ export default function People() {
         }
       }
       const response = await axios.post(
-        "http://192.168.119.33:4000/person",
+        `${config.ipAddress}/person`,
         formState
       );
       setFormData({});

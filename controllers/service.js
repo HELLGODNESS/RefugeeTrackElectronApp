@@ -31,8 +31,10 @@ const getTimeSeries = (list, timeFrom, timeTo) => {
 module.exports = {
     async getStats(req, res) {
         try {
-            const timeFrom = subDays(startOfDay(new Date()), 7);
-            const timeTo = endOfDay(new Date());
+            const { startDate, endDate } = req.query;
+
+            const timeFrom = startDate ? new Date(startDate) : subDays(startOfDay(new Date()), 7);
+            const timeTo = endDate ? new Date(endDate) : endOfDay(new Date());
 
             const services = await client.service.findMany({
                 where: {
@@ -82,11 +84,12 @@ module.exports = {
     },
     async getAllServices(req, res) {
         try {
-            const { page = 0, limit = 20, search, date, service } = req.query;
+            const { page = 0, limit = 20, search, date, service, startDate, endDate } = req.query;
             const where = {
                 deletedAt: null,
-                date: date,
-                service: service.toUpperCase(),
+                ...(startDate && endDate && { date: { gte: startDate, lte: endDate } }),
+                ...(date && { date: date }),
+                ...(service && { service: service.toUpperCase() }),
                 ...(search && {
                     person: {
                         OR: [
@@ -121,11 +124,11 @@ module.exports = {
     async getServicesCount(req, res) {
         try {
 
-            const { date } = req.query;
-
+            const { date, startDate, endDate } = req.query;
             const cafeteria = await client.service.count({
                 where: {
-                    date: date,
+                    ...(startDate && endDate && { createdAt: { gte: new Date(startDate).toISOString(), lte: new Date(endDate).toISOString() } }),
+                    ...(date && { date: date }),
                     deletedAt: null,
                     service: 'CAFETERIA',
                     person: {
@@ -135,7 +138,8 @@ module.exports = {
             });
             const takeawayPackage = await client.service.findMany({
                 where: {
-                    date: date,
+                    ...(startDate && endDate && { createdAt: { gte: new Date(startDate).toISOString(), lte: new Date(endDate).toISOString() } }),
+                    ...(date && { date: date }),
                     deletedAt: null,
                     service: "TAKEAWAY_PACKAGE",
                     person: {
@@ -164,7 +168,8 @@ module.exports = {
 
             const showers = await client.service.count({
                 where: {
-                    date: date,
+                    ...(startDate && endDate && { createdAt: { gte: new Date(startDate).toISOString(), lte: new Date(endDate).toISOString() } }),
+                    ...(date && { date: date }),
                     deletedAt: null,
                     service: 'SHOWERS',
                     person: {
@@ -175,7 +180,8 @@ module.exports = {
 
             const covers = await client.service.count({
                 where: {
-                    date: date,
+                    ...(startDate && endDate && { createdAt: { gte: new Date(startDate).toISOString(), lte: new Date(endDate).toISOString() } }),
+                    ...(date && { date: date }),
                     deletedAt: null,
                     service: 'COVERS',
                     person: {
@@ -186,7 +192,8 @@ module.exports = {
 
             const medicines = await client.service.count({
                 where: {
-                    date: date,
+                    ...(startDate && endDate && { createdAt: { gte: new Date(startDate).toISOString(), lte: new Date(endDate).toISOString() } }),
+                    ...(date && { date: date }),
                     deletedAt: null,
                     service: 'MEDICINES',
                     person: {

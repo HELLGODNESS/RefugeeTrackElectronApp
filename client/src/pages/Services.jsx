@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import AutoComplete from "../components/AutoComplete";
 import axios from "axios";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import config from "../config";
 
 
 function Services() {
@@ -48,7 +49,7 @@ function Services() {
         <img
           className="w-16 h-16 rounded-full"
           // src={data.Image}
-          src={data.image ? `http://192.168.119.33:4000/file/${data.image}` : 'user.png'}
+          src={data.image ? `${config.ipAddress}/file/${data.image}` : 'user.png'}
           alt="profile"
         />
       ),
@@ -73,7 +74,7 @@ function Services() {
   const getServices = () => {
     setLoading(true);
     axios
-      .get("http://192.168.119.33:4000/service", {
+      .get(`${config.ipAddress}/service`, {
         params: { page, limit, date: new Date().toDateString(), service: session },
       }) // Pass searchQuery to API call
       .then((res) => {
@@ -94,7 +95,7 @@ function Services() {
 
   function deleteFromTable(data) {
     axios
-      .delete("http://192.168.119.33:4000/service", {
+      .delete(`${config.ipAddress}/service`, {
         params: { id: data.id },
       })
       .then((res) => {

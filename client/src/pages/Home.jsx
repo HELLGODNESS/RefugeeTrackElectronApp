@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Chart from "react-apexcharts";
+import config from '../config';
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -62,7 +63,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.119.33:4000/service/count", {
+      .get(`${config.ipAddress}/service/count`, {
         params: { date: new Date().toDateString() },
       })
       .then((res) => {
@@ -71,7 +72,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-    axios.get("http://192.168.119.33:4000/service/stats", { params: { date: new Date().toDateString() } })
+    axios.get(`${config.ipAddress}/service/stats`, { params: { date: new Date().toDateString() } })
       .then((res) => {
         setStats(res.data);
       }).catch((err) => {
