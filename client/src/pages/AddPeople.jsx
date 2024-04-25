@@ -29,13 +29,12 @@ export default function People() {
     nationality: "",
     bornOn: "",
     maritalStatus: "",
-    bornIn: "",
+    livewith: "",
     emailAddress: "",
     country: "",
     streetAddress: "",
     city: "",
     zip: "",
-    pec: "",
     cell: "",
   });
 
@@ -96,7 +95,7 @@ export default function People() {
       generateIdentityCard();
 
       // Reset form data after successful request processing
-      toast.success("Person Added successfully");
+      toast.success("Persona aggiunta con successo");
 
       // Calculate new barcode value after setting barcodeValue
       const newBarcodeValue = calculateBarcodeValue();
@@ -286,26 +285,7 @@ export default function People() {
                     />
                   </div>
                 </div>
-                <div className="">
-                  <label
-                    htmlFor="bornIn"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    {t("Born in")}
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      name="bornIn"
-                      id="bornIn"
-                      value={formData.bornIn || ''}
-                      onChange={inputHandler}
-                      autoComplete="family-name"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
+                
                 <div className="">
                   <label
                     htmlFor="child"
@@ -326,6 +306,25 @@ export default function People() {
                         setFieldSets([...Array.from({ length: +e.target.value }, (_, index) => ({ id: index + 1 }))])
                       }}
                       autoComplete="Numero di figli"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <div className="">
+                  <label
+                    htmlFor="livewith"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    {t("Born in")}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="livewith"
+                      id="livewith"
+                      value={formData.livewith || ''}
+                      onChange={inputHandler}
+                      autoComplete="family-name"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                     />
                   </div>
@@ -749,47 +748,6 @@ export default function People() {
                   autoComplete="address-level2"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2 mt-2 gap-x-6 gap-y-8 flex">
-              <div className="flex-1">
-                <label
-                  htmlFor="lastJobFrom"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  
-                  {t("Last Job Done From")}
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="date"
-                    name="lastJobFrom"
-                    id="lastJobFrom"
-                    value={formData.lastJobFrom || ''}
-                    onChange={inputHandler}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1 ml-4">
-                <label
-                  htmlFor="lastJobTo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  {t("Last Job Done To")}
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="date"
-                    name="lastJobTo"
-                    id="lastJobTo"
-                    value={formData.lastJobTo || ''}
-                    onChange={inputHandler}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                  />
-                </div>
               </div>
             </div>
           </div>

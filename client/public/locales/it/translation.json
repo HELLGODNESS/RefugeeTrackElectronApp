@@ -6,7 +6,7 @@
   "Child" : "Figli",
   "Gender" : "Sesso",
   "Born on" : "Nato il",
-  "Born in" : "Luogo di Nascita",
+  "Born in" : "Con chi Vivono?",
   "Nationality" : "Nazionalità",
   "Marital status" : "Stato Civile",
   "City" : "Citta",
@@ -92,6 +92,8 @@
   "Last Job Done To":"al",
   "View People":"Tesserati",
   "Last 7 Days Stats":"Statistiche Ultimi 7 Giorni",
+  "Person Deleted successfully":"Persona Eliminata con Successo",
+  "Services by countries" : "Servizi per Paese",
   "Management" : "SCHEDA"
   
   

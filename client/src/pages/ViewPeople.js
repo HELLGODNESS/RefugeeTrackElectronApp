@@ -65,9 +65,9 @@ export default function ViewPeople() {
     },
     // { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
     {
-      id: "bornIn",
+      id: "livewith",
       label: t("Born in"),
-      component: (data) => <>{data.bornIn || ""} </>,
+      component: (data) => <>{data.livewith || ""} </>,
     },
     {
       id: "city",
@@ -168,7 +168,7 @@ export default function ViewPeople() {
       })
       .then((res) => {
         getPeople()
-        toast.success("Person Deleted successfully");
+        toast.success("Persona Eliminata con Successo");
       })
       .catch((err) => {
         console.log(err);
@@ -183,7 +183,7 @@ export default function ViewPeople() {
 
   const handlePrint = () => {
     if (!identityCardRef.current) {
-      console.error("Identity card element not found.");
+      console.error("Tessera non Trovata.");
       return;
     }
 

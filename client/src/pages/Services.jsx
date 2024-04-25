@@ -37,7 +37,7 @@ function Services() {
     { id: "id", label: t("ID") },
     { id: "Name", label: t("Name"), component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     { id: "gender", label: t("Gender"), component: (data) => <>{data.gender || ''} </> },
-    { id: "bornIn", label: t("Born in"), component: (data) => <>{data.bornIn || ''} </> },
+    { id: "livewith", label: t("Born in"), component: (data) => <>{data.livewith || ''} </> },
     { id: "city", label: t("City"), component: (data) => <>{data.city || ''} </> },
     { id: "emailAddress", label: t("Email"), component: (data) => <>{data.emailAddress || ''} </> },
     { id: "cell", label: t("Mobile phone"), component: (data) => <>{data.cell || ''}</> },

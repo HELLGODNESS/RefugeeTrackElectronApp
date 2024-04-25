@@ -22,7 +22,7 @@ model Person {
   nationality   String?
   bornOn        DateTime?
   emailAddress  String?
-  bornIn        String?
+  livewith        String?
   cell          String?
   child         String?
   religion      String?

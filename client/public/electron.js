@@ -18,7 +18,7 @@ function createWindow() {
 
   win.loadURL(
     isDev
-      ? 'http://localhost:3000'
+      ? 'http://192.168.119.33:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`
   )
   win.webContents.openDevTools();

@@ -6,7 +6,7 @@
   "author": "Shahab Udin Hamid <59618242+shahabhamid@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^5.12.1",
+    "@prisma/client": "^5.13.0",
     "cli": "^1.0.1",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",

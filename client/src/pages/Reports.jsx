@@ -97,7 +97,7 @@ export default function Reports() {
     { id: "id", label: t("ID") },
     { id: "Name", label: t("Name"), component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     { id: "gender", label: t("Gender"), component: (data) => <>{data.gender || ''} </> },
-    { id: "bornIn", label: t("Born in"), component: (data) => <>{data.bornIn || ''} </> },
+    { id: "livewith", label: t("Born in"), component: (data) => <>{data.livewith || ''} </> },
     { id: "city", label: t("City"), component: (data) => <>{data.city || ''} </> },
     { id: "emailAddress", label: t("Email"), component: (data) => <>{data.emailAddress || ''} </> },
     { id: "cell", label: t("Mobile phone"), component: (data) => <>{data.cell || ''}</> },
@@ -189,7 +189,7 @@ export default function Reports() {
   const handleDownload = async () => {
     try {
       // Make a GET request to download the file
-      const response = await axios.get('http://localhost:4000/service/export', {
+      const response = await axios.get('http://192.168.119.33:4000/service/export', {
         responseType: 'blob' // Set responseType to 'blob' to receive binary data
       });
 

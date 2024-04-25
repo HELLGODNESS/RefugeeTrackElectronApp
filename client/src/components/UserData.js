@@ -27,9 +27,8 @@ function UserData(props) {
     image,
     maritalStatus,
     gender,
-    bornIn,
+    livewith,
     emailAddress,
-    pec,
     religion,
     child,
     zip,
@@ -129,7 +128,7 @@ function UserData(props) {
               <div className="sm:col-span-1">
                 <dt className="text-sm font-medium text-gray-500"> {t("Born in")}</dt>
                 <dd className="mt-1 text-sm text-gray-900">
-                  {bornIn && <p>{bornIn}</p>}
+                  {livewith && <p>{livewith}</p>}
                 </dd>
               </div>
               <div className="sm:col-span-1">
@@ -148,12 +147,6 @@ function UserData(props) {
                 <dt className="text-sm font-medium text-gray-500"> Email</dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {emailAddress && <p>{emailAddress}</p>}
-                </dd>
-              </div>
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500"> Pec</dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {pec && <p>{pec}</p>}
                 </dd>
               </div>
 
