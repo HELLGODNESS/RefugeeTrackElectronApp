@@ -15,6 +15,7 @@ datasource db {
 
 model Person {
   id            Int       @id @default(autoincrement())
+  membershipNumber     String?
   firstName     String?
   lastName      String?
   maritalStatus String?
@@ -26,7 +27,7 @@ model Person {
   cell          String?
   child         String?
   religion      String?
-
+  birthPlace String?
   city                      String?
   region                    String?
   state                     String?
@@ -47,6 +48,7 @@ model Person {
   documentNumber  String?
   residencyPermit String?
 
+  exitDate DateTime?
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   deletedAt DateTime?
