@@ -68,8 +68,8 @@ export default function ViewPeople() {
     },
     // { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
     {
-      id: "livewith",
-      label: t("Born in"),
+      id: "nationality",
+      label: t("Nationality"),
       component: (data) => <>{data.livewith || ""} </>,
     },
     {
@@ -81,13 +81,13 @@ export default function ViewPeople() {
     // { id: "pec", label: "Pec", component: (data) => <>{data.pec || ''} </> },
     // { id: "bornOn", label: "Born On", component: (data) => <>{data.bornOn || ''} </> },
     {
-      id: "emailAddress",
-      label: "Email",
+      id: "bornOn",
+      label: "Birthday",
       component: (data) => <>{data.emailAddress || ""} </>,
     },
     {
-      id: "cell",
-      label: t("Mobile phone"),
+      id: "allergies",
+      label: t("Allergies"),
       component: (data) => <>{data.cell || ""}</>,
     },
     {

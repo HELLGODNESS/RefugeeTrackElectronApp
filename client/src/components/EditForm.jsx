@@ -66,11 +66,11 @@ export default function EditForm(props) {
         formData
       );
       // Handle success
-      toast.success("User data updated successfully!");
+      toast.success(t("User data updated successfully!"));
     } catch (error) {
       // Handle error
-      console.error("Error updating user data:", error);
-      toast.error("Failed to update user data.");
+      console.error(t("Error updating user data:", error));
+      toast.error(t("Failed to update user data."));
     }
 
 };

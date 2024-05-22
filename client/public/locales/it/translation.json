@@ -94,6 +94,11 @@
   "Last 7 Days Stats":"Statistiche Ultimi 7 Giorni",
   "Person Deleted successfully":"Persona Eliminata con Successo",
   "Services by countries" : "Servizi per Paese",
+  "Birthday":"Data di nascita",
+  "Update":"Aggiorna",
+  "Failed to update user data":"Aggiornamento dati utente non riuscito",
+  "User data updated successfully!":"Dati utente aggiornati con successo!",
+  "Error updating user data:":"Errore aggiornamento dati utente:",
   "Management" : "SCHEDA"
   
   
