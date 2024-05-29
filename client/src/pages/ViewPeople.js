@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import config from "../config";
 import EditForm from "../components/EditForm";
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
+import { nationalities } from "../utils/nationalities";
 
 export default function ViewPeople() {
   const [page, setPage] = useState(0);
@@ -34,6 +35,10 @@ export default function ViewPeople() {
   const [searchQuery, setSearchQuery] = useState("");
   const { t, i18n } = useTranslation();
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [nationality, setNationality] = useState('')
+  const [year, setYear] = useState('')
+  const [age, setAge] = useState('')
+  const [gender, setGender] = useState('')
 
   const [state, setState] = useState({
     tableBodyList: tableBodyList,
@@ -76,7 +81,7 @@ export default function ViewPeople() {
       label: t("City"),
       component: (data) => <>{data.city || ""} </>,
     },
-   
+
     {
       id: "birthPlace",
       label: "Birth Place",
@@ -123,7 +128,7 @@ export default function ViewPeople() {
           <button
             className=" no-focus"
             title="Edit User Data"
-             onClick={(e) => setEditModalOpen(data)}
+            onClick={(e) => setEditModalOpen(data)}
           >
             <PencilIcon className="w-5 h-5" />
           </button>
@@ -144,7 +149,12 @@ export default function ViewPeople() {
     setLoading(true);
     axios
       .get(`${config.ipAddress}/person`, {
-        params: { page, limit, search: searchQuery },
+        params: {
+          page, limit, search: searchQuery,
+          ...(nationality && { nationality }),
+          ...(year && { year }),
+          ...(age && { age }),
+        },
       }) // Pass searchQuery to API call
       .then((res) => {
         setTableBodyList(res.data.list);
@@ -159,7 +169,7 @@ export default function ViewPeople() {
 
   useEffect(() => {
     getPeople()
-  }, [limit, page, searchQuery]);
+  }, [limit, page, searchQuery, nationality, gender, year, age]);
 
   function deleteFromTable(data) {
     axios
@@ -184,7 +194,7 @@ export default function ViewPeople() {
   const handleEditCancel = () => {
     setEditModalOpen(false);
   };
-  
+
   const handlePrint = () => {
     if (!identityCardRef.current) {
       console.error("Tessera non Trovata.");
@@ -207,6 +217,7 @@ export default function ViewPeople() {
       });
   };
 
+
   return (
     <div className="mt-10">
       <SectionHeader
@@ -216,125 +227,108 @@ export default function ViewPeople() {
         breadCrumbs={[{ subPage: "View All People", link: "/viewPeople" }]}
       />
 
-<div className='mx-8 w-[80%] mt-2 '>
-      <h2 className="text-xl font-medium leading-6 text-gray-900 px-1 mt-3 mb-3">{t("Filters")}</h2>
-      <div className='my-2'>
+      <div className='mx-8 w-[80%] mt-2 '>
+        <h2 className="text-xl font-medium leading-6 text-gray-900 px-1 mt-3 mb-3">{t("Filters")}</h2>
+        <div className='my-2'>
+          <div className="px-1 grid  gap-4 md:grid-cols-6">
+            <div className="">
+              <div className="mt-8">
+                <input
+                  placeholder={t("Search by name...")}
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                  autoComplete="given-name"
+                  className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
 
-        <div className="px-1 grid  gap-4 md:grid-cols-6">
-
-      
-
-<div className="">
-           
-            <div className="mt-8">
-              <input
-                placeholder={t("Search by name...")}
-                value={searchQuery}
-                onChange={handleSearchInputChange}
-                autoComplete="given-name"
-                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
+            <div className="">
+              <label
+                htmlFor="nationality"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Nationality")}
+              </label>
+              <div className="mt-2">
+                <select
+                  type="text"
+                  name="nationality"
+                  id="nationality"
+                  value={nationality}
+                  onChange={(e) => setNationality(e.target.value)}
+                  autoComplete="family-name"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                >
+                  <option value="">Select</option>
+                  {nationalities.map((nationality) => <option value={nationality.alpha_2_code}>{nationality.nationality}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="">
+              <label
+                htmlFor="gender"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Gender")}
+              </label>
+              <div className="mt-2">
+                <select
+                  id="gender"
+                  name="gender"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  autoComplete="Gender"
+                  className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
+                >
+                  <option value="">Select</option>
+                  <option value={"Male"}>{t("Male")}</option>
+                  <option value={"Female"}>{t("Female")}</option>
+                  <option value={"Other"}>{t("Other")}</option>
+                </select>
+              </div>
+            </div>
+            <div className="">
+              <label
+                htmlFor="age"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Age")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="number"
+                  name="age"
+                  id="age"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  autoComplete="given-name"
+                  className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="">
+              <label
+                htmlFor="year"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                {t("Registered Since")}
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="year"
+                  id="year"
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  autoComplete="given-name"
+                  className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                />
+              </div>
             </div>
           </div>
-       
-          <div className="">
-            <label
-              htmlFor="nationality"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              {t("Nationality")}
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                name="nationality"
-                id="nationality"
-               
-                
-                autoComplete="given-name"
-                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="">
-            <label
-              htmlFor="sex"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              {t("Sex")}
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                name="sex"
-                id="sex"
-                
-                
-                autoComplete="given-name"
-                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="">
-            <label
-              htmlFor="age"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              {t("Age")}
-            </label>
-            <div className="mt-2">
-              <input
-                type="number"
-                name="age"
-                id="age"
-                
-                
-                autoComplete="given-name"
-                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="">
-            <label
-              htmlFor="year"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              {t("Years")}
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                name="year"
-                id="year"
-                autoComplete="given-name"
-                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-
-          <div className="inline-flex">
-            <div className="mt-8">
-              <button type="button"  class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                </svg>
-                <span class="sr-only">Search</span>
-              </button>
-            </div>
-            <div className="mt-8">
-              <button  type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <ArrowUpTrayIcon className='w-4 h-4' />
-                <span class="sr-only">Export</span>
-              </button>
-            </div>
-          </div>
-
         </div>
       </div>
-
-    </div>
-
-    
 
       <Dialog
         onFalse={(e) =>
@@ -388,7 +382,7 @@ export default function ViewPeople() {
       </Modal>
 
 
-      
+
       <Modal isModalOpen={!!editModalOpen} setModalOpen={setEditModalOpen}>
         <div className="bg-white text-left text-black w-[800px] md:w-[950px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
@@ -400,7 +394,7 @@ export default function ViewPeople() {
           </div>
           <EditForm {...editModalOpen} onCancel={handleEditCancel} setEditModalOpen={setEditModalOpen} />
         </div>
-        
+
 
       </Modal>
 

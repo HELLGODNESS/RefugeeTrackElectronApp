@@ -1,23 +1,41 @@
+const { subYears } = require("date-fns");
 const { client } = require("../utils/prisma-client");
 const path = require("path");
 
 module.exports = {
   async getAllPersons(req, res) {
     try {
-      const { page = 0, limit = 20, search } = req.query;
+      const { page = 0, limit = 20, search, nationality, gender,age,year } = req.query;
       const where = {
+        ...(+year && {
+          createdAt:{
+            lte:subYears(new Date(),+year-1),
+            gte:subYears(new Date(),+year)
+          }
+        }),
+        ...(+age && {
+          bornOn:{
+            lte:subYears(new Date(),+age-1),
+            gte:subYears(new Date(),+age)
+          }
+        }),
         deletedAt: null,
+        ...(nationality && {
+          nationality: nationality
+        }),
+        ...(gender && { gender }),
         ...(+search >= 1
           ? { id: +search }
           : {
-              OR: [
-                { firstName: { contains: search } },
-                { lastName: { contains: search } },
-                { emailAddress: { contains: search } },
-                { cell: { contains: search } },
-              ],
-            }),
+            OR: [
+              { firstName: { contains: search } },
+              { lastName: { contains: search } },
+              { emailAddress: { contains: search } },
+              { cell: { contains: search } },
+            ],
+          }),
       };
+      console.log("🚀 ~ getAllPersons ~ where:", where)
       const persons = await client.person.findMany({
         where,
         skip: +page < 1 ? 0 : +page * limit,
@@ -76,10 +94,10 @@ module.exports = {
           }),
           ...(documentUrls &&
             documentUrls.length && {
-              Documents: {
-                create: documentUrls,
-              },
-            }),
+            Documents: {
+              create: documentUrls,
+            },
+          }),
         },
       });
       res.status(201).json(person);
@@ -96,7 +114,7 @@ module.exports = {
         documentName: file.filename,
       }));
 
-      const { id, bornOn, family,Family,Documents, ...rest } = body;
+      const { id, bornOn, family, Family, Documents, ...rest } = body;
       const familyArray = family ? JSON.parse(family) : [];
       const person = await client.person.update({
         where: {
@@ -115,10 +133,10 @@ module.exports = {
           }),
           ...(documentUrls &&
             documentUrls.length && {
-              Documents: {
-                create: documentUrls,
-              },
-            }),
+            Documents: {
+              create: documentUrls,
+            },
+          }),
         },
       });
       res.status(201).json(person);

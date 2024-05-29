@@ -22,6 +22,12 @@ async function addPersons() {
         })
         console.log(person, 'person ')
     }
+
+    const person = await client.person.updateMany({
+        where:{gender:"M"},
+        data: {gender:"Male"}
+    })
+    console.log("🚀 ~ addPersons ~ person:", person)
     return {
         data: { message: "All Custom Fields Created" }
     }
