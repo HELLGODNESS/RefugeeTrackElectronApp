@@ -96,9 +96,9 @@ module.exports = {
         documentName: file.filename,
       }));
 
-      const { id, bornOn, family, ...rest } = body;
+      const { id, bornOn, family,Family,Documents, ...rest } = body;
       const familyArray = family ? JSON.parse(family) : [];
-      const person = await client.person.create({
+      const person = await client.person.update({
         where: {
           id: +id,
         },
@@ -108,7 +108,7 @@ module.exports = {
           ...(bornOn && {
             bornOn: new Date(bornOn).toISOString(),
           }),
-          ...(familyArray.length && {
+          ...(familyArray.length > 0 && {
             Family: {
               create: familyArray,
             },

@@ -11,7 +11,6 @@ import Modal from "./Modal";
 export default function EditForm(props) {
   const [fieldSets, setFieldSets] = useState([]);
   const [images, setImages] = useState();
-  const [editModalOpen,setEditModalOpen] = useState(true);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -67,11 +66,13 @@ export default function EditForm(props) {
       );
       // Handle success
       toast.success(t("User data updated successfully!"));
+      
     } catch (error) {
       // Handle error
       console.error(t("Error updating user data:", error));
       toast.error(t("Failed to update user data."));
     }
+    props.setEditModalOpen(false)
 
 };
 

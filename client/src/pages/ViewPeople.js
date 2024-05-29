@@ -60,35 +60,32 @@ export default function ViewPeople() {
         </>
       ),
     },
-    // { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
+    { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
     {
       id: "gender",
       label: t("Gender"),
       component: (data) => <>{data.gender || ""} </>,
     },
-    // { id: "nationality", label: "Nationality", component: (data) => <>{data.nationality || ''} </> },
     {
-      id: "nationality",
-      label: t("Nationality"),
-      component: (data) => <>{data.livewith || ""} </>,
+      id: "country",
+      label: t("Country"),
+      component: (data) => <>{data.country || ""} </>,
     },
     {
       id: "city",
       label: t("City"),
       component: (data) => <>{data.city || ""} </>,
     },
-    // { id: "streetAddress", label: "Address", component: (data) => <>{data.streetAddress || ''} </> },
-    // { id: "pec", label: "Pec", component: (data) => <>{data.pec || ''} </> },
-    // { id: "bornOn", label: "Born On", component: (data) => <>{data.bornOn || ''} </> },
+   
     {
-      id: "bornOn",
-      label: "Birthday",
-      component: (data) => <>{data.emailAddress || ""} </>,
+      id: "birthPlace",
+      label: "Birth Place",
+      component: (data) => <>{data.birthPlace || ""} </>,
     },
     {
-      id: "allergies",
-      label: t("Allergies"),
-      component: (data) => <>{data.cell || ""}</>,
+      id: "RegistrationDate",
+      label: t("Registration Date"),
+      component: (data) => <>{new Date(data.createdAt).toDateString() || ""}</>,
     },
     {
       id: "Image",
@@ -401,7 +398,7 @@ export default function ViewPeople() {
               className="w-5 h-5 text-gray-600 cursor-pointer"
             />
           </div>
-          <EditForm {...editModalOpen} onCancel={handleEditCancel} />
+          <EditForm {...editModalOpen} onCancel={handleEditCancel} setEditModalOpen={setEditModalOpen} />
         </div>
         
 
