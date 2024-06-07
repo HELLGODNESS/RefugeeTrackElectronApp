@@ -90,7 +90,7 @@ export default function ViewPeople() {
     {
       id: "RegistrationDate",
       label: t("Registration Date"),
-      component: (data) => <>{new Date(data.createdAt).toDateString() || ""}</>,
+      component: (data) => <>{new Date(data.createdAt).toISOString().slice(0, 10) || ""} </>,
     },
     {
       id: "Image",
