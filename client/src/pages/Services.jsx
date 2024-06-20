@@ -8,7 +8,12 @@ import AutoComplete from "../components/AutoComplete";
 import axios from "axios";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import config from "../config";
+import { nationalities } from '../utils/nationalities.js';
 
+const getCountryName = (alpha2Code) => {
+  const country = nationalities.find(nat => nat.alpha_2_code === alpha2Code);
+  return country ? country.en_short_name : '';
+};
 
 function Services() {
   const { t, i18n } = useTranslation();
@@ -37,10 +42,10 @@ function Services() {
     { id: "id", label: t("ID") },
     { id: "Name", label: t("Name"), component: (data) => <>{data.firstName || ''} {data.lastName || ''}</> },
     { id: "gender", label: t("Gender"), component: (data) => <>{data.gender || ''} </> },
-    { id: "livewith", label: t("Born in"), component: (data) => <>{data.livewith || ''} </> },
-    { id: "city", label: t("City"), component: (data) => <>{data.city || ''} </> },
-    { id: "emailAddress", label: t("Email"), component: (data) => <>{data.emailAddress || ''} </> },
-    { id: "cell", label: t("Mobile phone"), component: (data) => <>{data.cell || ''}</> },
+    { id: "bornOn", label: t("Born on"), component: (data) => <>{new Date(data.bornOn).toISOString().slice(0, 10) || ""} </> },
+    { id: "nationality", label: t("Nationality"), component: (data) => <>{getCountryName(data.nationality) || ''}</> },
+    { id: "child", label: t("child"), component: (data) => <>{data.child || 1}</> },
+    { id: "allergies", label: t("Allergies"), component: (data) => <>{data.allergies || ''} </> },
 
     {
       id: "Image",

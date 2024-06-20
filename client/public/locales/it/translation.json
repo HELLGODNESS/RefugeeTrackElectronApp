@@ -5,7 +5,7 @@
   "SurName": "Cognome",
   "Child" : "Figli",
   "Gender" : "Sesso",
-  "Born on" : "Nato il",
+  "Born on" : "Data di Nascita",
   "Born in" : "Con chi Vivono?",
   "Nationality" : "Nazionalità",
   "Marital status" : "Stato Civile",
@@ -39,7 +39,7 @@
   "Document Number" : "Numero Documento",
   "Residency Permit" : "Permesso di soggiorno",
   "Domicile information" : "Informazioni sul domicilio",
-  "Identity Card" : "Carta d'identità",
+  "Identity Card" : "Tessera",
   "Passport" : "Passaporto",
   "Celibate" : "Celibe",
   "Nubile" : "Nubile",
@@ -69,6 +69,7 @@
   "Profile" : "Profilo",
   "Address" : "Indirizzo",
   "Children" : "Figli",
+  "child" : "Pasti",
   "User Data" : "Dati Utente",
   "Card" : "GESTIONE",
   "Qualification": "Titolo di studio",
@@ -99,7 +100,10 @@
   "Failed to update user data":"Aggiornamento dati utente non riuscito",
   "User data updated successfully!":"Dati utente aggiornati con successo!",
   "Error updating user data:":"Errore aggiornamento dati utente:",
-  "Management" : "SCHEDA"
+  "Management" : "SCHEDA",
+  "Registration Date" : "Data di Registrazione",
+  "Birth Place" : "Luogo di Nascita",
+  "This card can be withdrawn at any time.":"Questa tessera può essere ritirata in qualsiasi momento."
   
   
 

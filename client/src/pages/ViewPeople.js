@@ -23,6 +23,10 @@ import EditForm from "../components/EditForm";
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 import { nationalities } from "../utils/nationalities";
 
+const getCountryName = (alpha2Code) => {
+  const country = nationalities.find(nat => nat.alpha_2_code === alpha2Code);
+  return country ? country.en_short_name : '';
+};
 export default function ViewPeople() {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
@@ -55,7 +59,7 @@ export default function ViewPeople() {
 
 
   const [tableHeaders, setTableHeaders] = useState([
-    { id: "id", label: "ID" },
+    { id: "id", label: t("ID") },
     {
       id: "Name",
       label: t("Name"),
@@ -65,7 +69,7 @@ export default function ViewPeople() {
         </>
       ),
     },
-    { id: "maritalStatus", label: "Marital Status", component: (data) => <>{data.maritalStatus || ''} </> },
+    { id: "maritalStatus", label: t("Marital status"), component: (data) => <>{data.maritalStatus || ''} </> },
     {
       id: "gender",
       label: t("Gender"),
@@ -73,8 +77,8 @@ export default function ViewPeople() {
     },
     {
       id: "country",
-      label: t("Country"),
-      component: (data) => <>{data.country || ""} </>,
+      label: t("Nationality"),
+      component: (data) => <>{getCountryName(data.nationality) || ''}</>,
     },
     {
       id: "city",
@@ -84,7 +88,7 @@ export default function ViewPeople() {
 
     {
       id: "birthPlace",
-      label: "Birth Place",
+      label: t("Birth Place"),
       component: (data) => <>{data.birthPlace || ""} </>,
     },
     {
@@ -312,7 +316,7 @@ export default function ViewPeople() {
                 htmlFor="year"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                {t("Registered Since")}
+                {t("Registration Date")}
               </label>
               <div className="mt-2">
                 <input

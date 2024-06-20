@@ -764,7 +764,7 @@ export const nationalities = [
   },
   {
       "num_code": "380",
-      "alpha_2_code": "IT",
+      "alpha_2_code": "I",
       "alpha_3_code": "ITA",
       "en_short_name": "Italy",
       "nationality": "Italian"
