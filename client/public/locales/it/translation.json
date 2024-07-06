@@ -41,6 +41,7 @@
   "Domicile information" : "Informazioni sul domicilio",
   "Identity Card" : "Tessera",
   "Passport" : "Passaporto",
+  "SINGLE":"Celibe",
   "Celibate" : "Celibe",
   "Nubile" : "Nubile",
   "Married" : "Sposato/a",
@@ -103,6 +104,8 @@
   "Management" : "SCHEDA",
   "Registration Date" : "Data di Registrazione",
   "Birth Place" : "Luogo di Nascita",
+  "MARRIED": "Sposato/a",
+  "Filters":"Filtri",
   "This card can be withdrawn at any time.":"Questa tessera può essere ritirata in qualsiasi momento."
   
   

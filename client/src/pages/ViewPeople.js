@@ -345,9 +345,10 @@ export default function ViewPeople() {
         dialogInfo={state.dialogInfo}
       />
       <Modal isModalOpen={!!cardModalOpen} setModalOpen={setCardModalOpen}>
-        <div className="bg-white text-left text-black w-[250px] rounded-lg my-8">
+        <div className="bg-white text-left text-black w-[400px] rounded-lg my-8">
           <div className="border-b flex justify-between items-center px-6 py-4">
             <h4 className="text-base text-gray-900 font-semibold">
+              
               {t("Identity Card")}
             </h4>
             <XMarkIcon
@@ -365,7 +366,7 @@ export default function ViewPeople() {
             className="ml-4 inline-flex gap-2 w-[88%] rounded-md bg-indigo-600  items-center text-center justify-center my-4 text-sm font-semibold py-1 text-white z-100"
             onClick={handlePrint}
           >
-            Print
+            Stampa
             <PrinterIcon className="w-5 h-5" />
           </button>
         </div>

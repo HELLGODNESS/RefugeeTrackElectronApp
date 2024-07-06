@@ -1,5 +1,6 @@
 import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const Modal = ({ children, isModalOpen, setModalOpen, containerClass, containerParentClass = "" }) => {
     const cancelButtonRef = useRef(null);
@@ -30,7 +31,13 @@ const Modal = ({ children, isModalOpen, setModalOpen, containerClass, containerP
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className='w-full flex items-center justify-center'>
+                            <Dialog.Panel className="relative w-full max-w-lg p-4 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all">
+                                <button
+                                    className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                                    onClick={() => setModalOpen(false)}
+                                >
+                                    <XMarkIcon className="h-6 w-6" />
+                                </button>
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>
